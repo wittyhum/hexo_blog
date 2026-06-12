@@ -331,7 +331,7 @@
 <h3 id="ThreadLocal的在项目中的使用"><a href="#ThreadLocal的在项目中的使用" class="headerlink" title="ThreadLocal的在项目中的使用"></a>ThreadLocal的在项目中的使用</h3><p>在项目中，登录后的用户每次访问接口，都会在请求头中携带一个 token，在控制层可以根据这个 token，解析出用户的基本信息。假如在服务层和持久层也要用到用户信息，就可以在控制层拦截请求把用户信息存入 ThreadLocal。这样在任何一个地方，都可以取出 ThreadLocal 中存的用户信息。</p>
 <h3 id="ThreadLocal的实现"><a href="#ThreadLocal的实现" class="headerlink" title="ThreadLocal的实现"></a>ThreadLocal的实现</h3><p>当我们创建一个 ThreadLocal 对象并调用 set 方法时，其实是在当前线程中初始化了一个 ThreadLocalMap。</p>
 <p>ThreadLocalMap 是 ThreadLocal 的一个静态内部类，它内部维护了一个 Entry 数组，key 是 ThreadLocal 对象，value 是线程的局部变量，这样就相当于为每个线程维护了一个变量副本。</p>
-<img src="2025/08/09/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94ThreadLocal/threadlocal.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/08/09/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94ThreadLocal/threadlocal.png" class="" title="This is an example image">
 
 <p>Entry 继承了 WeakReference，它限定了 key 是一个弱引用，弱引用的好处是当内存不足时，JVM 会回收 ThreadLocal 对象，并且将其对应的 Entry.value 设置为 null，这样可以在很大程度上避免内存泄漏。</p>
 <h3 id="弱引用与强引用"><a href="#弱引用与强引用" class="headerlink" title="弱引用与强引用"></a>弱引用与强引用</h3><p>首先是强引用，比如 <code>User user = new User(&quot;wuli韬&quot;);</code> ，user就是一个强引用，<code>new User(&quot;wuli韬&quot;)</code> 就是强引用对象。</p>

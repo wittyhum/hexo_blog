@@ -329,29 +329,29 @@
 <h4 id="MinIO对象存储"><a href="#MinIO对象存储" class="headerlink" title="MinIO对象存储"></a>MinIO对象存储</h4><p>企业知识库的基础资产是“文件”，包括PDF、Word等多类型文档，具备数量多、体积大、访问频繁的特点。MinIO 作为兼容S3协议的对象存储服务，适合承载海量文件的统一存储与管理。在本系统中，MinIO 用于存放上传的原始文档文件，后端保存文件元数据并关联业务数据，实现“文件内容与业务信息分离”的存储方式。该方式不仅便于扩容与备份，也能让文档管理更贴近真实企业场景的工程需求。</p>
 <h4 id="Elasticsearch全文检索引擎"><a href="#Elasticsearch全文检索引擎" class="headerlink" title="Elasticsearch全文检索引擎"></a>Elasticsearch全文检索引擎</h4><p>面向企业海量文档，检索能力是知识库系统的核心。Elasticsearch 基于倒排索引机制，支持分词检索、相关性评分与高并发查询，能够满足企业场景下对“快速定位内容”的需求。在本系统中，Elasticsearch 用于对文档内容建立索引并提供查询能力，使用户能够通过关键词或短语快速找到相关文档与内容片段。同时，检索结果还可以作为后续智能问答或内容归纳的基础输入，从而实现从“搜索文件”到“获取答案”的体验提升。</p>
 <h3 id="系统功能结构图"><a href="#系统功能结构图" class="headerlink" title="系统功能结构图"></a>系统功能结构图</h3><p>知识库系统面向企业内部文档的集中管理与高效获取需求进行总体设计，目标是在保证数据安全与权限隔离的前提下，提升文档检索效率与问答体验。系统以“文档入库—知识组织—检索&#x2F;问答—结果追溯”为主线，形成从知识沉淀到知识使用的闭环流程：用户可完成登录与个人信息管理，并在知识库中上传、查看与维护文档；系统对文档内容进行处理后提供检索与对话式提问能力，帮助用户快速定位相关信息，同时支持查看引用来源以便复核。面向管理侧，系统提供组织标签与用户管理能力，用于实现基于角色与标签的数据访问控制，并支持必要的系统监控与审计追溯功能。系统功能结构如图所示，各模块之间职责清晰、边界明确，便于后续扩展与维护。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/function.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/function.png" class="" title="This is an example image">
 
 
 <h3 id="系统架构图"><a href="#系统架构图" class="headerlink" title="系统架构图"></a>系统架构图</h3><p>知识库系统整体采用分层解耦的设计思路，按照“前端交互—业务服务—数据存储—外部能力”的方式组织，实现功能清晰划分与组件可替换扩展。前端层基于 Vue3 构建，后端通过 RESTful 接口完成常规业务通信，并在对话等强交互场景中通过 WebSocket 建立实时连接，实现消息的双向传输与流式展示。系统安全认证采用 JWT 机制，前后端完全分离且保持无状态鉴权，便于部署扩展与多端接入。<br>业务逻辑层是系统核心，主要由四个模块组成：用户管理模块负责用户注册登录、密码加密与身份令牌签发，并通过 RBAC 实现功能权限控制；文件上传与处理模块面向大文件场景，提供分片上传、断点续传与合并能力，同时将耗时处理通过异步方式解耦；知识库检索模块围绕检索能力构建，包含向量生成、向量检索以及文件权限过滤等关键环节，为语义检索与权限隔离提供技术基础；聊天助手模块负责对话交互链路，基于 WebFlux 支撑流式响应，并结合Prompt构建与会话管理实现多轮对话的连贯体验。数据层采用多元化存储策略：MySQL 用于保存用户信息、文件元数据与任务状态等结构化数据，Redis 用于缓存会话与热点状态以提升访问性能，MinIO 承担文档分片与原文件的对象存储，Elasticsearch 用于全文检索与向量检索，支撑高效的知识定位与召回。<br>此外，系统集成外部能力以完善完整链路：通过 Qwen API 提供生成式能力支持，通过 Embedding API 完成文本向量化；异步任务编排与解耦依赖 Kafka；多格式文档解析由 Apache Tika 完成，覆盖PDF、Word、Excel等常见文档类型；系统运行日志与问题追踪由 LogBack 支撑。系统总体架构如图所示。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/framework.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/framework.png" class="" title="This is an example image">
 
 
-<h3 id="系统页面展示"><a href="#系统页面展示" class="headerlink" title="系统页面展示"></a>系统页面展示</h3><h4 id="系统介绍"><a href="#系统介绍" class="headerlink" title="系统介绍"></a>系统介绍</h4><img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/introduce.png" class="" title="This is an example image">
+<h3 id="系统页面展示"><a href="#系统页面展示" class="headerlink" title="系统页面展示"></a>系统页面展示</h3><h4 id="系统介绍"><a href="#系统介绍" class="headerlink" title="系统介绍"></a>系统介绍</h4><img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/introduce.png" class="" title="This is an example image">
 
 <h4 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h4><p>用户在知识库模块中可上传文档，系统支持分片上传与断点续传，上传成功后文件被合并并保存到对象存储。普通用户上传时默认使用主组织标签作为文档归属标签，从而保证权限与可见范围一致。用户可查看自己及组织范围内可访问的文档列表，并进行预览与下载操作。如图所示。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/upload.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/upload.png" class="" title="This is an example image">
 
 <h4 id="知识库检索"><a href="#知识库检索" class="headerlink" title="知识库检索"></a>知识库检索</h4><p>用户输入检索关键词或问题后，系统执行混合检索（关键词匹配 + 向量语义检索），返回 Top‑K 结果。检索结果结合组织标签权限过滤，仅展示用户可访问的文档片段，实现高效且安全的知识检索体验。如图所示。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/search.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/search.png" class="" title="This is an example image">
 
 <h4 id="聊天助手对话"><a href="#聊天助手对话" class="headerlink" title="聊天助手对话"></a>聊天助手对话</h4><p>用户在聊天助手界面输入问题，系统首先检索知识库并构建上下文 Prompt，然后调用 Qwen 模型进行回答生成。回答以流式方式返回前端，保证交互实时性。同时系统将对话记录保存，支持用户查看历史对话。如图5.5所示。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/assistant.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/assistant.png" class="" title="This is an example image">
 
 <h4 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h4><p>管理员可查看系统用户列表，对用户进行启用&#x2F;禁用操作，并为用户分配或调整组织标签，以实现细粒度的权限控制与组织划分。如图所示。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/user.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/user.png" class="" title="This is an example image">
 
 <h4 id="组织标签管理"><a href="#组织标签管理" class="headerlink" title="组织标签管理"></a>组织标签管理</h4><p>管理员可新增、编辑、删除组织标签，并配置标签的父子层级关系，用于构建组织结构与权限继承模型。如图所示。</p>
-<img src="2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/organization.png" class="" title="This is an example image">
+<img src="/hexo_blog/2026/02/27/RAG%E7%9F%A5%E8%AF%86%E5%BA%93%E7%B3%BB%E7%BB%9F/organization.png" class="" title="This is an example image">
         </div>
 
         

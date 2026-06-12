@@ -322,7 +322,7 @@
         </header>
 
         <div class="post-content">
-            <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="Spring用了哪些设计模式？"><a href="#Spring用了哪些设计模式？" class="headerlink" title="Spring用了哪些设计模式？"></a>Spring用了哪些设计模式？</h3><img src="2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/Spring.png" class="" title="This is an example image">
+            <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="Spring用了哪些设计模式？"><a href="#Spring用了哪些设计模式？" class="headerlink" title="Spring用了哪些设计模式？"></a>Spring用了哪些设计模式？</h3><img src="/hexo_blog/2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/Spring.png" class="" title="This is an example image">
 
 <p>首先是工厂模式，这个在 Spring 里用得非常多。BeanFactory 就是一个典型的工厂，它负责创建和管理所有的 Bean 对象。我们平时用的 ApplicationContext 其实也是 BeanFactory 的一个实现。当我们通过 @Autowired 获取一个 Bean 的时候，底层就是通过工厂模式来创建和获取对象的。</p>
 <p>单例模式也是 Spring 的默认行为。默认情况下，Spring 容器中的 Bean 都是单例的，整个应用中只会有一个实例。这样可以节省内存，提高性能。当然我们也可以通过 @Scope 注解来改变 Bean 的作用域，比如设置为 prototype 就是每次获取都创建新实例。</p>
@@ -346,7 +346,7 @@
 <h4 id="Component和-Bean的区别？"><a href="#Component和-Bean的区别？" class="headerlink" title="@Component和@Bean的区别？"></a>@Component和@Bean的区别？</h4><p>首先从使用上来说，@Component 是标注在类上的，而 @Bean 是标注在方法上的。@Component 告诉 Spring 这个类是一个组件，请把它注册为 Bean，而 @Bean 则告诉 Spring 请将这个方法返回的对象注册为 Bean。</p>
 <p>从控制权的角度来说，@Component 是由 Spring 自动创建和管理的。<br>而 @Bean 则是由我们手动创建的，然后再交给 Spring 管理，我们对对象的创建过程有完全的控制权。</p>
 <h4 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h4><p>Bean 的生命周期可以分为 5 个主要阶段。</p>
-<img src="2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/Bean.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/Bean.png" class="" title="This is an example image">
 
 <p>第一个阶段是实例化。Spring 容器会根据 BeanDefinition，通过反射调用 Bean 的构造方法创建对象实例。如果有多个构造方法，Spring 会根据依赖注入的规则选择合适的构造方法。</p>
 <p>第二阶段是属性赋值。这个阶段 Spring 会给 Bean 的属性赋值，包括通过 @Autowired、@Resource 这些注解注入的依赖对象，以及通过 @Value 注入的配置值。</p>
@@ -366,7 +366,7 @@
 <p>④连接点：被拦截到的点，因为 Spring 只支持方法类型的连接点，所以在 Spring 中，连接点指的是被拦截到的方法，实际上连接点还可以是字段或者构造方法。</p>
 <p>⑤织入：是把切面逻辑应用到目标对象的过程。Spring AOP 是在运行时通过动态代理来实现织入的，当我们从 Spring 容器中获取 Bean 的时候，如果这个 Bean 需要被切面处理，Spring 就会返回一个代理对象给我们。</p>
 <p>⑥目标对象：被切面处理的对象，也就是我们平时写的 Service、Controller 等类。Spring AOP 会在目标对象上织入切面逻辑。</p>
-<img src="2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/AOP.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/AOP.png" class="" title="This is an example image">
 
 
 <h4 id="AOP的应用场景"><a href="#AOP的应用场景" class="headerlink" title="AOP的应用场景"></a>AOP的应用场景</h4><p>事务管理是用得最多的场景，基本上每个项目都会用到。只需要在 Service 方法上加个 @Transactional 注解，Spring 就会自动帮我们管理事务的开启、提交和回滚。</p>

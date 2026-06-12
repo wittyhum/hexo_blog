@@ -323,7 +323,7 @@
 
         <div class="post-content">
             <h2 id="Java内存模型"><a href="#Java内存模型" class="headerlink" title="Java内存模型"></a>Java内存模型</h2><p>Java 内存模型是 Java 虚拟机规范中定义的一个抽象模型，用来描述多线程环境中共享变量的内存可见性。</p>
-<img src="2025/08/21/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/JavaMemoryModel.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/08/21/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/JavaMemoryModel.png" class="" title="This is an example image">
 
 <p>共享变量存储在主内存中，每个线程都有一个私有的本地内存，存储了共享变量的副本。</p>
 <p>当一个线程更改了本地内存中共享变量的副本，它需要 JMM 刷新到主内存中，以确保其他线程可以看到这些更改。<br>当一个线程需要读取共享变量时，它一般会从本地内存中读取。如果本地内存中的副本是过时的，JMM 会将主内存中的共享变量最新值刷新到本地内存中。</p>

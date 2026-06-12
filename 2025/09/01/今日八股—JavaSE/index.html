@@ -336,7 +336,7 @@
 <p>②平台无关性，“一次编写，到处运行”，因此采用 Java 语言编写的程序具有很好的可移植性。</p>
 <p>③支持多线程。C++ 语言没有内置的多线程机制，因此必须调用操作系统的 API 来完成多线程程序设计，而 Java 却提供了封装好的线程支持.</p>
 <p>④支持 JIT 编译，也就是即时编译器，它可以在程序运行时将字节码转换为热点机器码来提高程序的运行速度。</p>
-<img src="2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/JavaSE.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/JavaSE.png" class="" title="This is an example image">
 
 <p>JVM：也就是 Java 虚拟机，是 Java 实现跨平台的关键所在，不同的操作系统有不同的 JVM 实现。JVM 负责将 Java 字节码转换为特定平台的机器码，并执行。</p>
 <p>JRE：也就是 Java 运行时环境，包含了运行 Java 程序所必需的库，以及 JVM。</p>
@@ -345,7 +345,7 @@
 <p>原理是增加了一个中间件 JVM，JVM 负责将 Java 字节码转换为特定平台的机器码，并执行。</p>
 <p>字节码，就是 Java 程序经过编译后产生的 .class 文件。</p>
 <h3 id="Java的数据类型"><a href="#Java的数据类型" class="headerlink" title="Java的数据类型"></a>Java的数据类型</h3><p>Java 的数据类型可以分为两种：基本数据类型和引用数据类型。</p>
-<img src="2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/datatype.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/datatype.png" class="" title="This is an example image">
 
 <p>基本数据类型有：</p>
 <p>①、数值型</p>
@@ -355,7 +355,7 @@
 </ul>
 <p>③、布尔型（boolean）</p>
 <p>它们的默认值和占用大小如下所示：</p>
-<img src="2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/basictype.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/basictype.png" class="" title="This is an example image">
 
 <p>引用数据类型有：</p>
 <ul>
@@ -388,7 +388,7 @@
 <p>3、性能 ：<strong>String</strong> 性能最低，尤其是在频繁修改字符串时会生成大量临时对象，增加内存开销和垃圾回收压力。<strong>StringBuilder</strong> 性能最高，因为它没有线程安全的开销，适合单线程下的字符串操作。<strong>StringBuffer</strong> 性能略低于 <strong>StringBuilder</strong>，因为它的线程安全机制引入了同步开销。</p>
 <p>4、使用场景 ：如果字符串内容固定或不常变化，优先使用 <strong>String</strong>。如果需要频繁修改字符串且在单线程环境下，使用 <strong>StringBuilder</strong>。如果需要频繁修改字符串且在多线程环境下，使用 <strong>StringBuffer</strong>。</p>
 <h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>Java 中的异常处理机制用于处理程序运行过程中可能发生的各种异常情况，通常通过 try-catch-finally 语句和 throw 关键字来实现。</p>
-<img src="2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/throwable.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/throwable.png" class="" title="This is an example image">
 
 <p>Throwable 是 Java 语言中所有错误和异常的基类。它有两个主要的子类：Error 和 Exception，这两个类分别代表了 Java 异常处理体系中的两个分支。</p>
 <p>Error 类代表那些严重的错误，这类错误通常是程序无法处理的。比如，OutOfMemoryError 表示内存不足，StackOverflowError 表示栈溢出。这些错误通常与 JVM 的运行状态有关，一旦发生，应用程序通常无法恢复。</p>

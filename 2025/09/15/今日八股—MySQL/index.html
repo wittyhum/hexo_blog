@@ -339,7 +339,7 @@
 <p>TRUNCATE 用于清空表中的所有数据，但会保留表结构，不能回滚。</p>
 <h3 id="查询语句的执行顺序？"><a href="#查询语句的执行顺序？" class="headerlink" title="查询语句的执行顺序？"></a>查询语句的执行顺序？</h3><p>先执行 FROM 确定主表，再执行 JOIN 连接，然后 WHERE 进行过滤，接着 GROUP BY 进行分组，HAVING 过滤聚合结果，SELECT 选择最终列，ORDER BY 排序，最后 LIMIT 限制返回行数。</p>
 <p>WHERE 先执行是为了减少数据量，HAVING 只能过滤聚合数据，ORDER BY 必须在 SELECT 之后排序最终结果，LIMIT 最后执行以减少数据传输。</p>
-<img src="2025/09/15/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94MySQL/sentence.png" class="" title="This is an example image">
+<img src="/hexo_blog/2025/09/15/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94MySQL/sentence.png" class="" title="This is an example image">
 
 
 <h3 id="MySQL函数"><a href="#MySQL函数" class="headerlink" title="MySQL函数"></a>MySQL函数</h3><p>处理字符串的函数：<br>CONCAT(): 用于连接两个或多个字符串。<br>LENGTH(): 用于返回字符串的长度。<br>SUBSTRING(): 从字符串中提取子字符串。<br>REPLACE(): 替换字符串中的某部分。<br>TRIM(): 去除字符串两侧的空格或其他指定字符。</p>
