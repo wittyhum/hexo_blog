@@ -9,7 +9,7 @@ class SnowFall {
   constructor(options = {}) {
     this.maxFlakes = options.maxFlakes || 60; 
     this.wind = options.wind || 0.5;
-    this.imageSrc = options.imageSrc || '/js/snow.svg'; 
+    this.imageSrc = options.imageSrc || 'js/snow.svg'; 
     
     // 交互配置
     this.mouseRadius = options.mouseRadius || 100;   // 鼠标避让范围
@@ -199,7 +199,7 @@ class Snowflake {
 // 调用
 const snow = new SnowFall({ 
   maxFlakes: 50, 
-  imageSrc: '/js/snow.svg',
+  imageSrc: 'js/snow.svg',
   burstRadius: 300, // 点击波及范围
   burstStrength: 25 // 爆发力度
 });
