@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>今日八股—线程池 | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">今日八股—线程池</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 24, 2025&nbsp;&nbsp;9:56:04</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">学习日记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>线程池是用来管理和复用线程的工具，它可以减少线程的创建和销毁开销。</p>
+<p>在 Java 中，ThreadPoolExecutor 是线程池的核心实现，它通过核心线程数、最大线程数、任务队列和拒绝策略来控制线程的创建和执行。</p>
+<h3 id="线程池的工作流程"><a href="#线程池的工作流程" class="headerlink" title="线程池的工作流程"></a>线程池的工作流程</h3><p>第一步，创建线程池。</p>
+<p>第二步，调用线程池的 execute()方法，准备执行任务。</p>
+<ul>
+<li>如果正在运行的线程数量小于 corePoolSize，那么线程池会创建一个新的线程来执行这个任务；</li>
+<li>如果正在运行的线程数量大于或等于 corePoolSize，那么线程池会将这个任务放入等待队列；</li>
+<li>如果等待队列满了，而且正在运行的线程数量小于 maximumPoolSize，那么线程池会创建新的线程来执行这个任务；</li>
+<li>如果等待队列满了，而且正在运行的线程数量大于或等于 maximumPoolSize，那么线程池会执行拒绝策略。</li>
+</ul>
+<p>第三步，线程执行完毕后，线程并不会立即销毁，而是继续保持在池中等待下一个任务。</p>
+<p>第四步，当线程空闲时间超出指定时间，且当前线程数量大于核心线程数时，线程会被回收。</p>
+<h3 id="线程池的主要参数"><a href="#线程池的主要参数" class="headerlink" title="线程池的主要参数"></a>线程池的主要参数</h3><p>线程池有 7 个参数，需要重点关注的有核心线程数、最大线程数、等待队列、拒绝策略。</p>
+<p>①corePoolSize：核心线程数，长期存活，执行任务的主力。</p>
+<p>②maximumPoolSize：线程池允许的最大线程数。</p>
+<p>③workQueue：任务队列，存储等待执行的任务。</p>
+<p>④handler：拒绝策略，任务超载时的处理方式。也就是线程数达到 maximumPoolSiz，任务队列也满了的时候，就会触发拒绝策略。</p>
+<p>⑤threadFactory：线程工厂，用于创建线程，可自定义线程名。</p>
+<p>⑥keepAliveTime：非核心线程的存活时间，空闲时间超过该值就销毁。</p>
+<p>⑦unit：keepAliveTime 参数的时间单位：</p>
+<ul>
+<li><p>TimeUnit.DAYS; 天</p>
+</li>
+<li><p>TimeUnit.HOURS; 小时</p>
+</li>
+<li><p>TimeUnit.MINUTES; 分钟</p>
+</li>
+<li><p>TimeUnit.SECONDS; 秒</p>
+</li>
+<li><p>TimeUnit.MILLISECONDS; 毫秒</p>
+</li>
+<li><p>TimeUnit.MICROSECONDS; 微秒</p>
+</li>
+<li><p>TimeUnit.NANOSECONDS; 纳秒</p>
+</li>
+</ul>
+<h3 id="线程池的拒绝策略"><a href="#线程池的拒绝策略" class="headerlink" title="线程池的拒绝策略"></a>线程池的拒绝策略</h3><p>有四种：</p>
+<ul>
+<li>AbortPolicy：默认的拒绝策略，会抛 RejectedExecutionException 异常。</li>
+<li>CallerRunsPolicy：让提交任务的线程自己来执行这个任务，也就是调用 execute 方法的线程。</li>
+<li>DiscardOldestPolicy：等待队列会丢弃队列中最老的一个任务，也就是队列中等待最久的任务，然后尝试重新提交被拒绝的任务。</li>
+<li>DiscardPolicy：丢弃被拒绝的任务，不做任何处理也不抛出异常。</li>
+</ul>
+<h3 id="有几种常见的线程池？"><a href="#有几种常见的线程池？" class="headerlink" title="有几种常见的线程池？"></a>有几种常见的线程池？</h3><p>主要有四种：</p>
+<p>固定大小的线程池 Executors.newFixedThreadPool(int nThreads);，适合用于任务数量确定，且对线程数有明确要求的场景。例如，IO 密集型任务、数据库连接池等。</p>
+<p>缓存线程池 Executors.newCachedThreadPool();，适用于短时间内任务量波动较大的场景。例如，短时间内有大量的文件处理任务或网络请求。</p>
+<p>定时任务线程池 Executors.newScheduledThreadPool(int corePoolSize);，适用于需要定时执行任务的场景。例如，定时发送邮件、定时备份数据等。</p>
+<p>单线程线程池 Executors.newSingleThreadExecutor();，适用于需要按顺序执行任务的场景。例如，日志记录、文件处理等。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Study/"># Study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../28/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/">今日八股—Java集合框架</a>
+            
+            
+            <a class="next" rel="next" href="../../21/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">今日八股—Java内存模型</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

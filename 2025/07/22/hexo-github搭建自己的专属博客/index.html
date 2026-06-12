@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>hexo &amp; github搭建自己的专属博客 | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">hexo &amp; github搭建自己的专属博客</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 22, 2025&nbsp;&nbsp;16:26:03</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E6%95%99%E7%A8%8B/">教程</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>这是一篇搭建博客的文章，也不算是教程吧，就是把自己经过两天两夜搭建的过程和报错分享出来，方便以后在新环境部署时有个参考，也希望能够给有需要的朋友们提供一点帮助。</p>
+</blockquote>
+<h3 id="一、-环境准备"><a href="#一、-环境准备" class="headerlink" title="一、 环境准备"></a>一、 环境准备</h3><hr>
+<h4 id="1-Node-js安装"><a href="#1-Node-js安装" class="headerlink" title="1. Node.js安装"></a>1. Node.js安装</h4><blockquote>
+<p>Node.js是Hexo的运行环境，一定一定要安装！</p>
+</blockquote>
+<ul>
+<li>1  <a target="_blank" rel="noopener" href="https://nodejs.org/en">前往官网下载</a></li>
+<li>2  默认选项安装</li>
+<li>3.打开命令提示符win+R，输入cmd按回车进入终端，在终端输入</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure>
+
+<p>查看版本号，有版本号信息则安装成功</p>
+<p>接着再继续输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config set registry https://registry.npmmirror.com</span><br></pre></td></tr></table></figure>
+
+<p>进行换源为淘宝镜像，提示下载速度</p>
+<h4 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="2. Git安装"></a>2. Git安装</h4><ul>
+<li>1  <a target="_blank" rel="noopener" href="https://git-scm.com/downloads">下载Git</a></li>
+<li>2  安装选择默认选项</li>
+<li>3  继续打开终端，运行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+
+<p>有版本号则安装成功</p>
+<h4 id="3-Hexo安装"><a href="#3-Hexo安装" class="headerlink" title="3. Hexo安装"></a>3. Hexo安装</h4><blockquote>
+<p>注意：这一步需要先完成第二步</p>
+</blockquote>
+<p>安装完Git后，在桌面点击右键会有个 Open Git Bash here，没错点击它，打开后运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<p>进行安装，再运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<p>查看版本号，有显示版本号则安装成功</p>
+<h4 id="4-Github部署"><a href="#4-Github部署" class="headerlink" title="4. Github部署"></a>4. Github部署</h4><blockquote>
+<p>首先没有Github的话需要先进行注册，进不去的话可以用steam++加速</p>
+</blockquote>
+<p>进去首页后左边有个新建，点击新建创建仓库，仓库名称为**&lt;用户名&gt;.github.io**，这里的用户名一定要是你github的用户名</p>
+<p>仓库设置成公共或私有都可以，网上都有教程，我刚开始是设置为私有，不过后面要使用Github pages，又老老实实改为公共了。。</p>
+<p>不过要是不使用Github pages的话那都可以。</p>
+<p>创建完在Git Bash运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &lt;你的用户名&gt;</span><br><span class="line">git config --global user.email &lt;你的邮箱&gt;</span><br></pre></td></tr></table></figure>
+
+<p>再运行以下代码检查是否配置成功</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config -l</span><br></pre></td></tr></table></figure>
+
+<p>出现你的用户名和邮箱就是配置成功</p>
+<h4 id="5-连接至Github"><a href="#5-连接至Github" class="headerlink" title="5.  连接至Github"></a>5.  连接至Github</h4><p>继续运行一下代码生成ssh密钥，用于此电脑连接至 GitHub</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &lt;你的邮箱&gt;</span><br></pre></td></tr></table></figure>
+
+<p>按两次回车一次y，再两次回车密钥就生成成功了</p>
+<p>密钥在桌面-&gt;我的电脑-&gt;C盘-&gt;用户-&gt;你的系统用户名-&gt;.ssh-&gt;打开id_rsa.pub，就可以看到密钥了</p>
+<p>全选复制，进入Github-&gt;点击头像-&gt;setting-&gt;SSH and GPG keys-&gt;New SSH key</p>
+<p>Title随意，Key粘贴刚刚复制的密钥，之后点Add SSH key</p>
+<p>添加后在Git Bash运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>如果出现hi什么什么跟你打招呼用语，那就是连接成功了</p>
+<blockquote>
+<p>这里也可能报错，我就是报错ssh: connect to host github.com port 22: Connection refused</p>
+<p>我是直接修改访问时要走的端口号</p>
+<p>在.ssh文件夹里修改config文件为</p>
+<p>Host github.com<br>  Hostname ssh.github.com<br>  Port 443</p>
+</blockquote>
+<h3 id="二、-新建Hexo项目"><a href="#二、-新建Hexo项目" class="headerlink" title="二、 新建Hexo项目"></a>二、 新建Hexo项目</h3><hr>
+<p>在你需要存放Hexo项目的文件夹里右键，点击Open Git Bash here，运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init &lt;项目名&gt;</span><br><span class="line"># 进入刚刚创建的项目</span><br><span class="line">cd &lt;项目名&gt;</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="三、配置Hexo"><a href="#三、配置Hexo" class="headerlink" title="三、配置Hexo"></a>三、配置Hexo</h3><hr>
+<p>可以参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration">官方配置文档</a></p>
+<p>建议使用 <a target="_blank" rel="noopener" href="https://code.visualstudio.com/Download">Visual Studio Code</a> 进行编辑</p>
+<p>vscode需要先打开Hexo文件夹，点上方终端-&gt;新建终端，或者直接在Git Bash运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>浏览器打开 <a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a> 测试网站</p>
+<h3 id="四、-安装主题"><a href="#四、-安装主题" class="headerlink" title="四、 安装主题"></a>四、 安装主题</h3><hr>
+<p>可以安装<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Hexo</a>提供的主题或者在Github上找一些别人开源的主题</p>
+<p>也可以安装<a target="_blank" rel="noopener" href="https://butterfly.js.org/posts/21cfbf15/">butterfly</a>主题，不过需要自己配置（如果想要一些花里胡哨的东西就下载这个叭）</p>
+<p>主题下载解压完后把解压后的文件夹放到Hexo项目的themes文件夹中</p>
+<h3 id="五、-托管到Github"><a href="#五、-托管到Github" class="headerlink" title="五、 托管到Github"></a>五、 托管到Github</h3><hr>
+<p>安装 hexo-deployer-git</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>在Hexo项目修改 _config.yml 文件 deploy 部分</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: git@github.com:&lt;用户名&gt;/&lt;用户名&gt;.github.io.git</span><br><span class="line">  branch: gh-pages</span><br></pre></td></tr></table></figure>
+
+<p>修改好配置后记得 CTRL+S 保存，运行以下命令，将代码部署到 GitHub</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>如果出现<code>Deploy done</code>，则说明部署成功</p>
+<blockquote>
+<p>这里这里！！我又报错了，卡了我一天！</p>
+<p>就是hexo d的时候报错为：“SSL证书问题:无法获取本地颁发机构证书”，csdn和百度都翻烂了，无论是取消代理设置</p>
+<p>git config –global –unset http.proxy<br>git config –global –unset https.proxy</p>
+<p>还是修改端口git config –global http.proxy <a href="http://127.0.0.1:7890，都是不行">http://127.0.0.1:7890，都是不行</a></p>
+<p>就在我快要放弃时，突然看到一篇<a target="_blank" rel="noopener" href="https://blog.csdn.net/Passerby_Wang/article/details/121104162">博客</a>，他是直接不验证SSL证书，虽然这会不安全，但对于我个人而言能有什么数据，直接采纳！</p>
+<p>首先执行命令</p>
+<p><code>git config --global http.sslVerify false</code></p>
+<p>设置为false，再运行</p>
+<p><code>vim  ~/.gitconfig</code></p>
+<p>查看是否成功，要是sslVerify &#x3D; false 就是设置成功了，这样就能成功推送啦</p>
+</blockquote>
+<h3 id="六、Github-Pages"><a href="#六、Github-Pages" class="headerlink" title="六、Github Pages"></a>六、Github Pages</h3><hr>
+<p>虽然部署成功了，但我还是不能够访问，只能本地访问，所以我使用了Github Pages</p>
+<p>首先打开Github，点击创建的仓库-&gt;设置-&gt;Github Pages</p>
+<p>如果你的仓库是私有的，那么你就会像我一样</p>
+<img src="2025/07/22/hexo-github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%93%E5%B1%9E%E5%8D%9A%E5%AE%A2/githubPage.png" class="" title="This is an example image">
+
+<p>这时候需要把仓库公开，在这个页面有个搭建和发布，就是source的下拉框，发布方法选择Github Actions，这里是使用jekyll（一款前端框架，可以把一些markdown格式的笔记渲染成前端页面），点击Configure配置就行，继续点击commit changes，这样Actions就创建完毕了，点击上方的Actions按钮，可以看到jekyll正在部署，出现绿色√就是部署完成了，再点击进去就会显示部署成功的地址，打开就可以正常访问这个地址了，这个域名是国内直连的，所以访问速度还是很快的</p>
+<h3 id="七、-添加文章"><a href="#七、-添加文章" class="headerlink" title="七、 添加文章"></a>七、 添加文章</h3><hr>
+<p>想要给博客添加文章需要输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &lt;title&gt; #title为想要编写的文章标题</span><br></pre></td></tr></table></figure>
+
+<p>运行后在Hexo项目的source-&gt;_posts，就可以看到你创建的文章了，接下来就可以在文章编写内容了，不过编写的格式为Markdown</p>
+<p>这是<a target="_blank" rel="noopener" href="https://markdown.com.cn/basic-syntax/">Markdown教程</a>，可以看一下，但我还是推荐在<a target="_blank" rel="noopener" href="https://typoraio.cn/">Typora</a>编写，非常方便</p>
+<p>需要插入图片的话，如果只是少量图片，可以直接把图片放在source&#x2F;images文件夹中，然后通过</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![](/images/image.jpg)</span><br></pre></td></tr></table></figure>
+
+<p>方法访问</p>
+<p>对于那些想要更有规律地提供图片和其他资源以及想要将资源分布在各个文章上的人来说，需要在_config.yml中设置为true</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
+
+<p>每个文章都会单独配套一个同名文件夹，用来存放图片</p>
+<p>Hexo提供三种语法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_path slug %&#125;</span><br><span class="line">&#123;% asset_img slug [title] %&#125;</span><br><span class="line">&#123;% asset_link slug [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在md中可以这样引用图片</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% asset_img example.jpg This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>想知道详细一点可以查看<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/index.html">Hexo文档</a>，在文档的资源文件夹里</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Hexo/"># Hexo</a>
+                    
+                        <a href="../../../../tags/Github/"># Github</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">从0到1开发项目经历</a>
+            
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

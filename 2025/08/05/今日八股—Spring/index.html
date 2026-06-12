@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>今日八股—Spring | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">今日八股—Spring</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 5, 2025&nbsp;&nbsp;22:23:38</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">学习日记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="Spring"><a href="#Spring" class="headerlink" title="Spring"></a>Spring</h2><h3 id="Spring用了哪些设计模式？"><a href="#Spring用了哪些设计模式？" class="headerlink" title="Spring用了哪些设计模式？"></a>Spring用了哪些设计模式？</h3><img src="2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/Spring.png" class="" title="This is an example image">
+
+<p>首先是工厂模式，这个在 Spring 里用得非常多。BeanFactory 就是一个典型的工厂，它负责创建和管理所有的 Bean 对象。我们平时用的 ApplicationContext 其实也是 BeanFactory 的一个实现。当我们通过 @Autowired 获取一个 Bean 的时候，底层就是通过工厂模式来创建和获取对象的。</p>
+<p>单例模式也是 Spring 的默认行为。默认情况下，Spring 容器中的 Bean 都是单例的，整个应用中只会有一个实例。这样可以节省内存，提高性能。当然我们也可以通过 @Scope 注解来改变 Bean 的作用域，比如设置为 prototype 就是每次获取都创建新实例。</p>
+<p>代理模式在 AOP 中用得特别多。Spring AOP 的底层实现就是基于动态代理的，对于实现了接口的类用 JDK 动态代理，没有实现接口的类用 CGLIB 代理。比如我们用 @Transactional 注解的时候，Spring 会为我们的类创建一个代理对象，在方法执行前后添加事务处理逻辑。</p>
+<p>模板方法模式在 Spring 里也很常见，比如 JdbcTemplate。它定义了数据库操作的基本流程：获取连接、执行 SQL、处理结果、关闭连接，但是具体的 SQL 语句和结果处理逻辑由我们来实现。</p>
+<p>观察者模式在 Spring 的事件机制中有所体现。我们可以通过 ApplicationEvent 和 ApplicationListener 来实现事件的发布和监听。比如用户注册成功后，我们可以发布一个用户注册事件，然后有多个监听器来处理后续的业务逻辑，比如发送邮件、记录日志等。</p>
+<h4 id="Spring如何实现单例模式？"><a href="#Spring如何实现单例模式？" class="headerlink" title="Spring如何实现单例模式？"></a>Spring如何实现单例模式？</h4><p>传统的单例模式是在类的内部控制只能创建一个实例，比如用 private 构造方法加 static getInstance() 这种方式。但是 Spring 的单例是容器级别的，同一个 Bean 在整个 Spring 容器中只会有一个实例。</p>
+<p>具体的实现机制是这样的：Spring 在启动的时候会把所有的 Bean 定义信息加载进来，然后在 DefaultSingletonBeanRegistry 这个类里面维护了一个叫 singletonObjects 的 ConcurrentHashMap，这个 Map 就是用来存储单例 Bean 的。key 是 Bean 的名称，value 就是 Bean 的实例对象。</p>
+<p>当我们第一次获取某个 Bean 的时候，Spring 会先检查 singletonObjects 这个 Map 里面有没有这个 Bean，如果没有就会创建一个新的实例，然后放到 Map 里面。后面再获取同一个 Bean 的时候，直接从 Map 里面取就行了，这样就保证了单例。</p>
+<p>还有一个细节就是 Spring 为了解决循环依赖的问题，还用了三级缓存。除了 singletonObjects 这个一级缓存，还有 earlySingletonObjects 二级缓存和 singletonFactories 三级缓存。这样即使有循环依赖，Spring 也能正确处理。</p>
+<h3 id="什么是IOC？"><a href="#什么是IOC？" class="headerlink" title="什么是IOC？"></a>什么是IOC？</h3><p>IoC 的全称是 Inversion of Control，也就是控制反转。这里的“控制”指的是对象创建和依赖关系管理的控制权。</p>
+<p>以前我们写代码的时候，如果 A 类需要用到 B 类，我们就在 A 类里面直接 new 一个 B 对象出来，这样 A 类就控制了 B 类对象的创建。</p>
+<p>有了 IoC 之后，这个控制权就“反转”了，不再由 A 类来控制 B 对象的创建，而是交给外部的容器来管理。</p>
+<h4 id="DI和IOC的区别？"><a href="#DI和IOC的区别？" class="headerlink" title="DI和IOC的区别？"></a>DI和IOC的区别？</h4><p>IoC 的思想是把对象创建和依赖关系的控制权由业务代码转移给 Spring 容器。这是一个比较抽象的概念，告诉我们应该怎么去设计系统架构。</p>
+<p>而 DI，也就是依赖注入，它是实现 IoC 这种思想的具体技术手段。在 Spring 里，我们用 @Autowired 注解就是在使用 DI 的字段注入方式。<br>从实现角度来看，DI 除了字段注入，还有构造方法注入和 Setter 方法注入等方式。</p>
+<h3 id="项目启动时Spring的IOC会做什么？"><a href="#项目启动时Spring的IOC会做什么？" class="headerlink" title="项目启动时Spring的IOC会做什么？"></a>项目启动时Spring的IOC会做什么？</h3><p>第一件事是扫描和注册 Bean。IoC 容器会根据我们的配置，比如 @ComponentScan 指定的包路径，去扫描所有标注了 @Component、@Service、@Controller 这些注解的类。然后把这些类的元信息包装成 BeanDefinition 对象，注册到容器的 BeanDefinitionRegistry 中。这个阶段只是收集信息，还没有真正创建对象。</p>
+<p>第二件事是 Bean 的实例化和注入。这是最核心的过程，IoC 容器会按照依赖关系的顺序开始创建 Bean 实例。对于单例 Bean，容器会通过反射调用构造方法创建实例，然后进行属性注入，最后执行初始化回调方法。</p>
+<p>在依赖注入时，容器会根据 @Autowired、@Resource 这些注解，把相应的依赖对象注入到目标 Bean 中。比如 UserService 需要 UserDao，容器就会把 UserDao 的实例注入到 UserService 中。</p>
+<h3 id="怎么理解Bean？"><a href="#怎么理解Bean？" class="headerlink" title="怎么理解Bean？"></a>怎么理解Bean？</h3><p>Bean 本质上就是由 Spring 容器管理的 Java 对象，但它和普通的 Java 对象有很大区别。普通的 Java 对象我们是通过 new 关键字创建的。而 Bean 是交给 Spring 容器来管理的，从创建到销毁都由容器负责。</p>
+<p>从实际使用的角度来说，我们项目里的 Service、Dao、Controller 这些都是 Bean。比如 UserService 被标注了 @Service 注解，它就成了一个 Bean，Spring 会自动创建它的实例，管理它的依赖关系，当其他地方需要用到 UserService 的时候，Spring 就会把这个实例注入进去。<br>这种依赖注入的方式让对象之间的关系变得松耦合。</p>
+<h4 id="Component和-Bean的区别？"><a href="#Component和-Bean的区别？" class="headerlink" title="@Component和@Bean的区别？"></a>@Component和@Bean的区别？</h4><p>首先从使用上来说，@Component 是标注在类上的，而 @Bean 是标注在方法上的。@Component 告诉 Spring 这个类是一个组件，请把它注册为 Bean，而 @Bean 则告诉 Spring 请将这个方法返回的对象注册为 Bean。</p>
+<p>从控制权的角度来说，@Component 是由 Spring 自动创建和管理的。<br>而 @Bean 则是由我们手动创建的，然后再交给 Spring 管理，我们对对象的创建过程有完全的控制权。</p>
+<h4 id="Bean的生命周期"><a href="#Bean的生命周期" class="headerlink" title="Bean的生命周期"></a>Bean的生命周期</h4><p>Bean 的生命周期可以分为 5 个主要阶段。</p>
+<img src="2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/Bean.png" class="" title="This is an example image">
+
+<p>第一个阶段是实例化。Spring 容器会根据 BeanDefinition，通过反射调用 Bean 的构造方法创建对象实例。如果有多个构造方法，Spring 会根据依赖注入的规则选择合适的构造方法。</p>
+<p>第二阶段是属性赋值。这个阶段 Spring 会给 Bean 的属性赋值，包括通过 @Autowired、@Resource 这些注解注入的依赖对象，以及通过 @Value 注入的配置值。</p>
+<p>第三阶段是初始化。这个阶段会依次执行：</p>
+<p>@PostConstruct 标注的方法<br>InitializingBean 接口的 afterPropertiesSet 方法<br>通过 @Bean 的 initMethod 指定的初始化方法</p>
+<p>第四阶段是使用 Bean。比如我们的 Controller 调用 Service，Service 调用 DAO。</p>
+<p>第五阶段是销毁阶段。当容器关闭或者 Bean 被移除的时候，会依次执行：</p>
+<p>@PreDestroy 标注的方法<br>DisposableBean 接口的 destroy 方法<br>通过 @Bean 的 destroyMethod 指定的销毁方法</p>
+<h3 id="Spring怎么解决循环依赖？"><a href="#Spring怎么解决循环依赖？" class="headerlink" title="Spring怎么解决循环依赖？"></a>Spring怎么解决循环依赖？</h3><p>Spring 通过三级缓存机制来解决循环依赖：</p>
+<p>一级缓存：存放完全初始化好的单例 Bean。<br>二级缓存：存放提前暴露的 Bean，实例化完成，但未初始化完成。<br>三级缓存：存放 Bean 工厂，用于生成提前暴露的 Bean。</p>
+<h3 id="什么是AOP？"><a href="#什么是AOP？" class="headerlink" title="什么是AOP？"></a>什么是AOP？</h3><p>AOP，也就是面向切面编程，简单点说，AOP 就是把一些业务逻辑中的相同代码抽取到一个独立的模块中，让业务逻辑更加清爽。</p>
+<p>AOP可以让我们把这些横切关注点（如日志、权限、事务等）从业务代码中抽取出来。</p>
+<p>这样，我们就可以定义一个切面，在切面中统一处理这些横切关注点。</p>
+<p>①切面：我们定义的一个类，包含了要在什么时候、什么地方执行什么逻辑。比如我们定义一个日志切面，专门负责记录方法的执行情况。在 Spring 中，我们会用 @Aspect 注解来标识一个切面类。</p>
+<p>②切点：定义了在哪些地方应用切面逻辑。说白了就是告诉 Spring，我这个切面要在哪些方法上生效。比如我们可以定义一个切点表达式，让它匹配所有 Service 层的方法，或者匹配某个特定包下的所有方法。在 Spring 中用 @Pointcut 注解来定义，通常会写一些表达式，比如 execution( com.example.service..*(..)) 这样的。</p>
+<p>③通知：是切面中具体要执行的代码逻辑。它有几种类型：@Before 是在方法执行前执行，@After 是在方法执行后执行，@Around 是环绕通知，可以在方法执行前后都执行，@AfterReturning 是在方法正常返回后执行，@AfterThrowing 是在方法抛出异常后执行。我一般用得最多的是 @Around，因为它最灵活，可以控制方法是否执行，也可以修改参数和返回值。</p>
+<p>④连接点：被拦截到的点，因为 Spring 只支持方法类型的连接点，所以在 Spring 中，连接点指的是被拦截到的方法，实际上连接点还可以是字段或者构造方法。</p>
+<p>⑤织入：是把切面逻辑应用到目标对象的过程。Spring AOP 是在运行时通过动态代理来实现织入的，当我们从 Spring 容器中获取 Bean 的时候，如果这个 Bean 需要被切面处理，Spring 就会返回一个代理对象给我们。</p>
+<p>⑥目标对象：被切面处理的对象，也就是我们平时写的 Service、Controller 等类。Spring AOP 会在目标对象上织入切面逻辑。</p>
+<img src="2025/08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/AOP.png" class="" title="This is an example image">
+
+
+<h4 id="AOP的应用场景"><a href="#AOP的应用场景" class="headerlink" title="AOP的应用场景"></a>AOP的应用场景</h4><p>事务管理是用得最多的场景，基本上每个项目都会用到。只需要在 Service 方法上加个 @Transactional 注解，Spring 就会自动帮我们管理事务的开启、提交和回滚。</p>
+<p>日志记录也是一个很常见的应用。利用了 AOP 来打印接口的入参和出参日志、执行时间，方便后期 bug 溯源和性能调优。</p>
+<h3 id="Spring的两种事务"><a href="#Spring的两种事务" class="headerlink" title="Spring的两种事务"></a>Spring的两种事务</h3><p>Spring提供了两种事务管理方式，一种是编程式事务，一种是声明式事务。编程式事务就是需要手动调用事务的开始、提交、回滚操作，虽然灵活但是代码比较繁琐。而声明式事务只需要在需要事务的方法上加 <code>@Transactional</code>注解，Spring就会帮我们自动处理事务的整个生命周期。</p>
+<p>声明式事务的优点是不需要在业务逻辑代码中参杂事务管理的代码，缺点是最细粒度只能到方法级别，无法到代码块级别。</p>
+<p>Spring事务的底层实现是通过AOP来完成的。当在方法上加 <code>@Transactional</code>注解后，Spring会为这个Bean创建代理对象，在方法执行前开启事务，方法正常返回时提交事务，如果方法抛出异常就回滚事务。</p>
+<p>Spring的声明式事务大致可以分为两个阶段：</p>
+<p>第一个阶段发生在Spring容器启动是，它会扫描所有的Bean。如果发现某个Bean的方法上标注了 <code>@Transactional</code>注解，Spring不会直接返回这个原始的Bean实例，而是为这个Bean创建一个代理对象。这个代理对象拥有和原始对象完全相同的方法，但在内部悄悄地包裹了事务处理的逻辑。</p>
+<p>第二个阶段发生在方法调用的运行阶段，当我们的代码调用被@Transactional注解修饰的方法时，实际上调用的是Spring创建的那个代理对象的方法。</p>
+<p>事务拦截器会在代理对象执行真正的业务逻辑之前，根据 <code>@Transactional</code>注解的配置获取事务属性，比如传播行为、隔离级别等，然后通过事务管理器开启一个新的事务。并从数据库连接池获取一个连接，关闭其自动提交。</p>
+<p>接着，代理对象会调用原始 Bean 实例中真正的业务方法，如果业务方法顺利执行完毕，没有抛出任何异常，那么拦截器就会通过事务管理器提交事务，将之前的所有数据库操作永久保存。</p>
+<p>如果业务方法抛出了异常，拦截器会捕获到这个异常，并通过事务管理器回滚事务，将之前的所有数据库操作撤销。</p>
+<p>最后，无论事务是提交还是回滚，拦截器都会释放数据库连接。</p>
+<h3 id="Transactional失效情况"><a href="#Transactional失效情况" class="headerlink" title="@Transactional失效情况"></a>@Transactional失效情况</h3><p>第一种，<code>@Transactional</code> 注解用在非 public 修饰的方法上。</p>
+<p>Spring 的 AOP 代理机制决定了它无法代理 private 方法。因为 private 方法在子类中是不可见的，代理类无法覆盖它。因此，在 private 方法上加 <code>@Transactional</code> 注解是完全无效的。</p>
+<p>第二种，方法内部调用。</p>
+<p>如果在一个类的方法 A 中，直接调用本类的另外一个加了 <code>@Transactional</code> 的方法 B，那么方法 B 的事务是不会生效的。</p>
+<p>这是因为方法 A 调用方法 B 时，使用的是 this 引用，直接访问原始对象的方法，绕过了 Spring 的代理对象，也就导致代理对象中的事务逻辑没有机会执行。</p>
+<p>第三种，捕获了异常没有抛出。</p>
+<p>如果在事务方法内部用 try-catch 捕获了异常，但没有在 catch 块中将异常重新抛出，或者抛出一个新的能触发回滚的异常，那么 Spring 的事务拦截器就无法感知到异常的发生，也就没办法回滚。</p>
+<p>第四种，Spring 事务默认只对 RuntimeException 和 Error 类型的异常进行回滚。</p>
+<p>如果在代码中抛出的是一个Checked Exception，是 Exception 的子类但不是 RuntimeException 的子类，又没有通过 <code>@Transactional(rollbackFor = Exception.class)</code> 指定事务回归的异常类型，那么事务同样不会回滚。</p>
+<h3 id="Spring事务的隔离级别"><a href="#Spring事务的隔离级别" class="headerlink" title="Spring事务的隔离级别"></a>Spring事务的隔离级别</h3><p>Spring 在标准的隔离级别上定义了五个隔离级别：</p>
+<p>DEFAULT 表示使用底层数据库的默认隔离级别。比如说对于 MySQL 来说，默认的隔离级别是可重复读，那就用可重复读；对于 Oracle 来说，默认是读已提交，那就用读已提交。</p>
+<p>读未提交是最低的隔离级别，允许读取未提交的数据。这种级别会出现脏读问题，也就是一个事务可能会读到另一个事务还没提交的数据。比如 A 事务修改了一条数据但还没提交，B 事务就能读到这个修改后的值，如果 A 事务后来回滚了，B 事务读到的就是脏数据。这个级别在实际项目中基本不会使用，因为数据一致性无法保证。</p>
+<p>读已提交解决了脏读问题，但会出现不可重复读问题，也就是在同一个事务中多次读取同一条数据，可能得到不同的结果。比如 A 事务先读了一条数据，然后 B 事务修改并提交了这条数据，A 事务再次读取时就会发现数据变了。</p>
+<p>可重复读保证在同一个事务中多次读取同一条数据的结果是一致的，解决了不可重复读问题。但是会出现幻读问题，也就是在同一个事务中多次执行同一个查询，可能会看到不同数量的记录。比如 A 事务查询某个条件的记录数是 10 条，然后 B 事务插入了一条符合条件的记录并提交，A 事务再次查询时可能会看到 11 条记录。MySQL 的 InnoDB 存储引擎通过临键锁在很大程度上解决了幻读问题。</p>
+<p>串行化是最高的隔离级别，完全串行化执行事务，可以解决所有并发问题，包括脏读、不可重复读和幻读。但是性能是最差的，因为事务基本上是排队执行的。在实际项目中很少使用，除非对数据一致性有极高的要求。</p>
+<p>在 Spring 中设置隔离级别也很简单，可以在 <code>@Transactional</code> 注解中通过 isolation 属性来指定</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Transactional(isolation = Isolation.READ_UNCOMMITTED) </span><br><span class="line">public void someMethod() &#123;  </span><br><span class="line">// 业务逻辑 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Spring事务的传播机制"><a href="#Spring事务的传播机制" class="headerlink" title="Spring事务的传播机制"></a>Spring事务的传播机制</h3><p>有7种传播机制：</p>
+<p>REQUIRED：默认，如果没有当前事务，就新建一个事务，如果存在一个事务，就加入到这个事务中。</p>
+<p>SUPPORTS：如果当前存在事务，则加入该事务；如果当前没有事务，则以非事务方式执行。</p>
+<p>MANDATORY：如果当前存在事务，则加入该事务；如果当前没有事务，则抛出异常。</p>
+<p>REQUIRED_NEW：新建事务，如果存在当前事务，就把当前事务挂起。</p>
+<p>NOT_SUPPORTED：以非事务方式执行操作，如果当前事务存在则将其挂起。</p>
+<p>NEVER：以非事务方式执行操作；如果当前存在事务，则抛出异常。</p>
+<p>NESTED：如果当前存在事务，则在事务内执行，如果当前没有事务，则创建一个新事务。</p>
+<p>事务传播机制是通过 ThreadLocal 实现的，所以，如果调用的方法是在新线程中，事务传播就会失效。</p>
+<h3 id="介绍一下Springboot"><a href="#介绍一下Springboot" class="headerlink" title="介绍一下Springboot"></a>介绍一下Springboot</h3><p>Spring Boot 可以说是 Spring 生态的一个重大突破，它极大地简化了 Spring 应用的开发和部署过程。</p>
+<p>以前我们用 Spring 开发项目的时候，需要配置一大堆 XML 文件，包括 Bean 的定义、数据源配置、事务配置等等，非常繁琐。而且还要手动管理各种 jar 包的依赖关系，很容易出现版本冲突的问题。部署的时候还要单独搭建 Tomcat 服务器，整个过程很复杂。Spring Boot 就是为了解决这些痛点而生的。</p>
+<p>“约定大于配置”是 Spring Boot 最核心的理念。它预设了很多默认配置，比如默认使用内嵌的 Tomcat 服务器，默认的日志框架是 Logback 等等。这样，我们开发者就只需要关注业务逻辑，不用再纠结于各种配置细节。</p>
+<p>自动装配也是 Spring Boot 的一大特色，它会根据项目中引入的依赖自动配置合适的 Bean。比如说，我们引入了 Spring Data JPA，Spring Boot 就会自动配置数据源；比如说，我们引入了 Spring Security，Spring Boot 就会自动配置安全相关的 Bean。</p>
+<p>Spring Boot 还提供了很多开箱即用的功能，比如 Actuator 监控、DevTools 开发工具、Spring Boot Starter 等等。Actuator 可以让我们轻松监控应用的健康状态、性能指标等；DevTools 可以加快开发效率，比如自动重启、热部署等；Spring Boot Starter 则是一些预配置好的依赖集合，让我们可以快速引入某些常用的功能。</p>
+<h4 id="Springboot的常用注解"><a href="#Springboot的常用注解" class="headerlink" title="Springboot的常用注解"></a>Springboot的常用注解</h4><p>@SpringBootApplication：这是 Spring Boot 的核心注解，它是一个组合注解，包含了 @Configuration、@EnableAutoConfiguration 和 @ComponentScan。它标志着一个 Spring Boot 应用的入口。<br>@SpringBootTest：用于测试 Spring Boot 应用的注解，它会加载整个 Spring 上下文，适合集成测试。</p>
+<h4 id="Springboot的自动装配原理"><a href="#Springboot的自动装配原理" class="headerlink" title="Springboot的自动装配原理"></a>Springboot的自动装配原理</h4><p>在 Spring Boot 中，开启自动装配的注解是@EnableAutoConfiguration。这个注解会告诉 Spring 去扫描所有可用的自动配置类。</p>
+<p>Spring Boot 为了进一步简化，把这个注解包含到了 @SpringBootApplication 注解中。也就是说，当我们在主类上使用 @SpringBootApplication 注解时，实际上就已经开启了自动装配。</p>
+<p>常见的场景是自动注入 Bean，比如用@ComponentScan 来扫描 service 包，@MapperScan 扫描 MyBatis 的 mapper 接口，实现业务层和 DAO 层的自动装配。</p>
+<h3 id="Springboot启动原理"><a href="#Springboot启动原理" class="headerlink" title="Springboot启动原理"></a>Springboot启动原理</h3><p>Spring Boot 的启动由 SpringApplication 类负责：</p>
+<ul>
+<li>第一步，创建 SpringApplication 实例，负责应用的启动和初始化；</li>
+<li>第二步，从 application.yml 中加载配置文件和环境变量；</li>
+<li>第三步，创建上下文环境 ApplicationContext，并加载 Bean，完成依赖注入；</li>
+<li>第四步，启动内嵌的 Web 容器。</li>
+<li>第五步，发布启动完成事件 ApplicationReadyEvent，并调用 ApplicationRunner 的 run 方法完成启动后的逻辑。</li>
+</ul>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Study/"># Study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../09/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94ThreadLocal/">今日八股—ThreadLocal</a>
+            
+            
+            <a class="next" rel="next" href="../../../07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/">从0到1开发项目经历</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

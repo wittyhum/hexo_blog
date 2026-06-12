@@ -1,0 +1,10 @@
+.corner-cartoon {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 10;
+}
+.corner-cartoon img {
+  width: 240px;
+  height: auto;
+}

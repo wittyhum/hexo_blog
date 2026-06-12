@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>从0到1开发项目经历 | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">从0到1开发项目经历</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">July 31, 2025&nbsp;&nbsp;13:11:59</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">学习日记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>一篇关于自己从0到1搭建Springboot项目的经历与成果</p>
+</blockquote>
+<h3 id="赛诺公司——访客系统项目"><a href="#赛诺公司——访客系统项目" class="headerlink" title="赛诺公司——访客系统项目"></a>赛诺公司——访客系统项目</h3><hr>
+<blockquote>
+<p>这是一个赛诺公司对接政府业务的真实需求项目。学校与赛诺公司合作，通过赛诺公司分发真实需求项目，学校老师负责将项目需求安排给学生并指导完成的一个项目。</p>
+</blockquote>
+<p>项目背景：在当今注重安全与高效管理的环境下，企业、园区、写字楼等场所对访客管理的需求日益增长。传统的人工登记方式存在效率低、易出错、数据统计困难等问题。本系统旨在通过信息化技术实现访客信息的快速登记、精准授权、高效通行及全面数据管理，提升场所的安全性与管理效率。</p>
+<p>这个项目要求是2-4人以团队的方式开发完成，我和一名舍友两人决定以一个团队来开发这个项目，舍友负责前端部分，我负责后端部分。本来我们也是想从开源平台上套现成框架再修修改改快速开发，后来想想我们还没有从0到1开发过项目，为什么不趁这个机会学习一下呢？说干就干，于是我们开始讨论每周的进度和任务，模仿企业开发的流程。我们制定了每一周的开发计划，第一周我们编写了需求分析文档、用例图、活动图、功能结构图、系统架构图、数据库表设计、接口文档等，为第二周的开发做准备。</p>
+<p>以下为部分图展示：</p>
+<p>用例图：</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/user.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>接口文档：</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/interface.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>数据库表：</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/database.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>接下来的几周我们便对项目进行开发，前端使用了vue3，后端使用了Springboot进行开发。</p>
+<p>后端我创建了Springboot项目并引入了各种依赖，如Web、lombok等依赖，创建了所需要的数据库表并连接到idea，开始编写注册登录功能。之前跟着黑马的苍穹外卖等项目使用的是mybatis框架，我了解了mybatisPlus以后也会是主流，于是我自学了mybatisPlus框架并用在这个项目上，能够实现基本的增删改查。</p>
+<p>在注册层面，首先管理员是不允许注册的，只能通过后台来添加，而用户是可以直接进行注册，注册的时候对密码进行了MD5加密+随机生成盐值的方式对密码进行加密，防止数据泄露带来的风险。</p>
+<p>在登录层面，输入正确的账户密码，就会对密码进行MD5解密+拼接盐值进行验证登录。</p>
+<p>在登录成功之后，会生成一个token，这里使用了JWT令牌机制，对用户身份进行判断访问各个页面。</p>
+<p>欢迎页面</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/welcome.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>注册页面</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/register.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>登录页面</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/login.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>用户预约页面：用户需要填写信息、上传身份证、手机号码验证，手机号码通过正则表达式对手机格式进行校验，校验通过后会发送验证码，验证码通过引入HuTool工具包随机生成6位随机数字并存储到reids中进行验证，最后提交的预约信息需要通过管理员的审批即可查看二维码进行入闸。</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/date.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>管理员审批页面：可以查看所有用户的预约信息，根据状态查看全部、已审批、未审批，可以对未审批的用户进行审批</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/admin.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>用户查看审批通过的二维码</p>
+<img src="2025/07/31/%E4%BB%8E0%E5%88%B01%E5%BC%80%E5%8F%91%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86/erweima.png" class="" title="This is an example image">
+
+
+
+
+
+
+<p>这就是这个项目的大致流程，由于所给的开发时间不多，我们又是从0开发，途中的各种问题我们都花费了大量的时间来解决，以至于无法拓展新的业务和技术栈。对于这个项目，我们也是边学边做，收获良多，在开发中我们也使用了git来提交和拉取代码，对git的使用和理解也更进一步。最后也感谢一起开发的小伙伴，有个人可以一起讨论和解决问题的感觉是很美好的，进步也是显著的。在今后我也会不断的拓展自己，增强自己的代码编写能力和业务逻辑能力。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Study/"># Study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../../08/05/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Spring/">今日八股—Spring</a>
+            
+            
+            <a class="next" rel="next" href="../../22/hexo-github%E6%90%AD%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E4%B8%93%E5%B1%9E%E5%8D%9A%E5%AE%A2/">hexo & github搭建自己的专属博客</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

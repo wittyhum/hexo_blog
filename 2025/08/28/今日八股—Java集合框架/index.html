@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>今日八股—Java集合框架 | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">今日八股—Java集合框架</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 28, 2025&nbsp;&nbsp;10:46:48</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">学习日记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="集合框架"><a href="#集合框架" class="headerlink" title="集合框架"></a>集合框架</h2><h3 id="有哪些常见的集合框架？"><a href="#有哪些常见的集合框架？" class="headerlink" title="有哪些常见的集合框架？"></a>有哪些常见的集合框架？</h3><img src="2025/08/28/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Java%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6/framework.png" class="" title="This is an example image">
+
+<p>集合框架可以分为两条大的支线：</p>
+<p>①、第一条支线 Collection，主要由 List、Set、Queue 组成：</p>
+<p>List 代表有序、可重复的集合，典型代表就是封装了动态数组的 ArrayList 和封装了链表的 LinkedList；<br>Set 代表无序、不可重复的集合，典型代表就是 HashSet 和 TreeSet；<br>Queue 代表队列，典型代表就是双端队列 ArrayDeque，以及优先级队列 PriorityQueue。<br>②、第二条支线 Map，代表键值对的集合，典型代表就是 HashMap、TreeMap。</p>
+<h3 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h3><p>ArrayList 是基于数组实现的，LinkedList 是基于链表实现的。</p>
+<p>多数情况下，ArrayList 更利于查找，LinkedList 更利于增删。</p>
+<p>①ArrayList 是基于数组的，也实现了 RandomAccess 接口，所以它支持随机访问，可以通过下标直接获取元素。<br>②LinkedList 是基于链表的，所以它没法根据下标直接获取元素，不支持随机访问。</p>
+<p>ArrayList 是基于数组的，是一块连续的内存空间，所以它的内存占用是比较紧凑的；但如果涉及到扩容，就会重新分配内存，空间是原来的 1.5 倍。<br>LinkedList 是基于链表的，每个节点都有一个指向下一个节点和上一个节点的引用，于是每个节点占用的内存空间比 ArrayList 稍微大一点。</p>
+<p>ArrayList 适用于：</p>
+<ul>
+<li>随机访问频繁：需要频繁通过索引访问元素的场景。</li>
+<li>读取操作远多于写入操作：如存储不经常改变的列表。</li>
+<li>末尾添加元素：需要频繁在列表末尾添加元素的场景。</li>
+</ul>
+<p>LinkedList 适用于：</p>
+<ul>
+<li>频繁插入和删除：在列表中间频繁插入和删除元素的场景。</li>
+<li>不需要快速随机访问：顺序访问多于随机访问的场景。</li>
+<li>队列和栈：由于其双向链表的特性，LinkedList 可以实现队列（FIFO）和栈（LIFO）。</li>
+</ul>
+<p>当往 ArrayList 中添加元素时，会先检查是否需要扩容，如果当前容量+1 超过数组长度，就会进行扩容。扩容后的新数组长度是原来的 1.5 倍，然后再把原数组的值拷贝到新数组中。</p>
+<h3 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h3><p>JDK 8 中 HashMap 的数据结构是数组+链表+红黑树。</p>
+<p>数组用来存储键值对，每个键值对可以通过索引直接拿到，索引是通过对键的哈希值进行进一步的 hash() 处理得到的。</p>
+<p>当多个键经过哈希处理后得到相同的索引时，需要通过链表来解决哈希冲突——将具有相同索引的键值对通过链表存储起来。</p>
+<p>不过，链表过长时，查询效率会比较低，于是当链表的长度超过 8 时（且数组的长度大于 64），链表就会转换为红黑树。红黑树的查询效率是 O(logn)，比链表的 O(n) 要快。</p>
+<p>hash() 方法的目标是尽量减少哈希冲突，保证元素能够均匀地分布在数组的每个位置上。</p>
+<p>如果键的哈希值已经在数组中存在，其对应的值将被新值覆盖。</p>
+<p>HashMap 的初始容量是 16，随着元素的不断添加，HashMap 就需要进行扩容，阈值是capacity * loadFactor，capacity 为容量，loadFactor 为负载因子，默认为 0.75。</p>
+<p>扩容后的数组大小是原来的 2 倍，然后把原来的元素重新计算哈希值，放到新的数组中。</p>
+<h3 id="HashMap的put流程"><a href="#HashMap的put流程" class="headerlink" title="HashMap的put流程"></a>HashMap的put流程</h3><p>第一步，通过 hash 方法进一步扰动哈希值，以减少哈希冲突。</p>
+<p>第二步，进行第一次的数组扩容；并使用哈希值和数组长度进行取模运算，确定索引位置。</p>
+<p>如果当前位置为空，直接将键值对插入该位置；否则判断当前位置的第一个节点是否与新节点的 key 相同，如果相同直接覆盖 value，如果不同，说明发生哈希冲突。</p>
+<p>如果是链表，将新节点添加到链表的尾部；如果链表长度大于等于 8，则将链表转换为红黑树。</p>
+<p>每次插入新元素后，检查是否需要扩容，如果当前元素个数大于阈值（capacity * loadFactor），则进行扩容，扩容后的数组大小是原来的 2 倍；并且重新计算每个节点的索引，进行数据重新分布。</p>
+<p>如果只重写 equals 方法，没有重写 hashCode 方法，那么会导致 equals 相等的两个对象，hashCode 不相等，这样的话，两个对象会被 put 到数组中不同的位置，导致 get 的时候，无法获取到正确的值。</p>
+<h3 id="解决哈希冲突有哪些方法？"><a href="#解决哈希冲突有哪些方法？" class="headerlink" title="解决哈希冲突有哪些方法？"></a>解决哈希冲突有哪些方法？</h3><p>有3种方法：再哈希法、开放地址法和拉链法。</p>
+<h4 id="再哈希法"><a href="#再哈希法" class="headerlink" title="再哈希法"></a>再哈希法</h4><p>准备两套哈希算法，当发生哈希冲突的时候，使用另外一种哈希算法，直到找到空槽为止。对哈希算法的设计要求比较高。</p>
+<h4 id="开放地址法"><a href="#开放地址法" class="headerlink" title="开放地址法"></a>开放地址法</h4><p>遇到哈希冲突的时候，就去寻找下一个空的槽。有 3 种方法：</p>
+<ul>
+<li>线性探测：从冲突的位置开始，依次往后找，直到找到空槽。</li>
+<li>二次探测：从冲突的位置 x 开始，第一次增加1²个位置，第二次增加2²，直到找到空槽。</li>
+<li>双重哈希：和再哈希法类似，准备多个哈希函数，发生冲突的时候，使用另外一个哈希函数。</li>
+</ul>
+<h4 id="拉链法"><a href="#拉链法" class="headerlink" title="拉链法"></a>拉链法</h4><p>也就是链地址法，当发生哈希冲突的时候，使用链表将冲突的元素串起来。HashMap 采用的正是拉链法。</p>
+<h4 id="怎么判断key相等"><a href="#怎么判断key相等" class="headerlink" title="怎么判断key相等"></a>怎么判断key相等</h4><p>①hashCode() ：使用key的hashCode()方法计算key的哈希码。</p>
+<p>②equals() ：当两个key的哈希码相同时，HashMap还会调用key的equals()方法进行精确比较。只有当equals()方法返回true时，两个key才被认为是完全相同的。</p>
+<p>如果两个key的引用指向了同一个对象，那么它们的hashCode()和equals()方法都会返回true，所以在 equals 判断之前可以先使用&#x3D;&#x3D;运算符判断一次。</p>
+<h3 id="HashMap的扩容机制"><a href="#HashMap的扩容机制" class="headerlink" title="HashMap的扩容机制"></a>HashMap的扩容机制</h3><p>扩容时，HashMap 会创建一个新的数组，其容量是原来的两倍。然后遍历旧哈希表中的元素，将其重新分配到新的哈希表中。</p>
+<p>如果当前桶中只有一个元素，那么直接通过键的哈希值与数组大小取模锁定新的索引位置：e.hash &amp; (newCap - 1)。</p>
+<p>如果当前桶是红黑树，那么会调用 split() 方法分裂树节点，以保证树的平衡。</p>
+<p>如果当前桶是链表，会通过旧键的哈希值与旧的数组大小取模 (e.hash &amp; oldCap) &#x3D;&#x3D; 0 来作为判断条件，如果条件为真，元素保留在原索引的位置；否则元素移动到原索引 + 旧数组大小的位置。</p>
+<h3 id="怎么解决HashMap线程不安全的问题？"><a href="#怎么解决HashMap线程不安全的问题？" class="headerlink" title="怎么解决HashMap线程不安全的问题？"></a>怎么解决HashMap线程不安全的问题？</h3><p>在早期的 JDK 版本中，可以用 Hashtable 来保证线程安全。Hashtable 在方法上加了 synchronized 关键字。</p>
+<p>另外，可以通过 Collections.synchronizedMap 方法返回一个线程安全的 Map，内部是通过 synchronized 对象锁来保证线程安全的，比在方法上直接加 synchronized 关键字更轻量级。</p>
+<p>更优雅的解决方案是使用并发工具包下的 ConcurrentHashMap，使用了CAS+ synchronized 关键字来保证线程安全。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Study/"># Study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../../09/01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/">今日八股—JavaSE</a>
+            
+            
+            <a class="next" rel="next" href="../../24/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94%E7%BA%BF%E7%A8%8B%E6%B1%A0/">今日八股—线程池</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

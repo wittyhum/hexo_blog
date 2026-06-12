@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>今日八股—JVM | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">今日八股—JVM</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 7, 2025&nbsp;&nbsp;22:53:37</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">学习日记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="JVM"><a href="#JVM" class="headerlink" title="JVM"></a>JVM</h2><h3 id="JVM的内存区域划分"><a href="#JVM的内存区域划分" class="headerlink" title="JVM的内存区域划分"></a>JVM的内存区域划分</h3><p>按照 Java 虚拟机规范，JVM 的内存区域可以细分为程序计数器、虚拟机栈、本地方法栈、堆和方法区。</p>
+<img src="2025/09/07/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JVM/JVM.png" class="" title="This is an example image">
+
+<p>其中方法区和堆是线程共享的，虚拟机栈、本地方法栈和程序计数器是线程私有的。</p>
+<p>JDK 1.6 使用永久代来实现方法区。<br>JDK 1.7 时仍然是永久代，但发生了一些细微变化，比如将字符串常量池、静态变量存放到了堆上。<br>在 JDK 1.8 时，直接在内存中划出了一块区域，叫元空间，来取代之前放在 JVM 内存中的永久代，并将运行时常量池、类常量池都移动到了元空间。</p>
+<h4 id="介绍一下程序计数器？"><a href="#介绍一下程序计数器？" class="headerlink" title="介绍一下程序计数器？"></a>介绍一下程序计数器？</h4><p>程序计数器也被称为 PC 寄存器，是一块较小的内存空间。它可以看作是当前线程所执行的字节码行号指示器。</p>
+<h4 id="介绍一下Java虚拟机栈？"><a href="#介绍一下Java虚拟机栈？" class="headerlink" title="介绍一下Java虚拟机栈？"></a>介绍一下Java虚拟机栈？</h4><p>Java 虚拟机栈的生命周期与线程相同。</p>
+<p>当线程执行一个方法时，会创建一个对应的栈帧，用于存储局部变量表、操作数栈、动态链接、方法出口等信息，然后栈帧会被压入虚拟机栈中。当方法执行完毕后，栈帧会从虚拟机栈中移除。</p>
+<h4 id="介绍一下本地方法栈？"><a href="#介绍一下本地方法栈？" class="headerlink" title="介绍一下本地方法栈？"></a>介绍一下本地方法栈？</h4><p>本地方法栈与虚拟机栈相似，区别在于虚拟机栈是为 JVM 执行 Java 编写的方法服务的，而本地方法栈是为 Java 调用本地 native 方法服务的，通常由 C&#x2F;C++ 编写。</p>
+<p>在本地方法栈中，主要存放了 native 方法的局部变量、动态链接和方法出口等信息。当一个 Java 程序调用一个 native 方法时，JVM 会切换到本地方法栈来执行这个方法。</p>
+<h4 id="介绍一下方法栈的运行场景？"><a href="#介绍一下方法栈的运行场景？" class="headerlink" title="介绍一下方法栈的运行场景？"></a>介绍一下方法栈的运行场景？</h4><p>当 Java 应用需要与操作系统底层或硬件交互时，通常会用到本地方法栈。</p>
+<p>比如调用操作系统的特定功能，如内存管理、文件操作、系统时间、系统调用等。</p>
+<p>比如说获取系统时间的 System.currentTimeMillis() 方法就是调用本地方法，来获取操作系统当前时间的。<br>再比如 JVM 自身的一些底层功能也需要通过本地方法来实现。像 Object 类中的 hashCode() 方法、clone() 方法等。</p>
+<p>native 方法是在 Java 中通过 native 关键字声明的，用于调用非 Java 语言，如 C&#x2F;C++ 编写的代码。Java 可以通过 JNI，也就是 Java Native Interface 与底层系统、硬件设备、或者本地库进行交互。</p>
+<h4 id="介绍一下Java堆？"><a href="#介绍一下Java堆？" class="headerlink" title="介绍一下Java堆？"></a>介绍一下Java堆？</h4><p>堆是 JVM 中最大的一块内存区域，被所有线程共享，在 JVM 启动时创建，主要用来存储 new 出来的对象。<br>Java 中“几乎”所有的对象都会在堆中分配，堆也是垃圾收集器管理的目标区域。</p>
+<p>堆属于线程共享的内存区域，几乎所有 new 出来的对象都会堆上分配，生命周期不由单个方法调用所决定，可以在方法调用结束后继续存在，直到不再被任何变量引用，最后被垃圾收集器回收。<br>栈属于线程私有的内存区域，主要存储局部变量、方法参数、对象引用等，通常随着方法调用的结束而自动释放，不需要垃圾收集器处理。</p>
+<h4 id="介绍一下方法区？"><a href="#介绍一下方法区？" class="headerlink" title="介绍一下方法区？"></a>介绍一下方法区？</h4><p>方法区并不真实存在，属于 Java 虚拟机规范中的一个逻辑概念，用于存储已被 JVM 加载的类信息、常量、静态变量、即时编译器编译后的代码缓存等。</p>
+<p>在 HotSpot 虚拟机中，方法区的实现称为永久代 PermGen，但在 Java 8 及之后的版本中，已经被元空间 Metaspace 所替代。</p>
+<h3 id="对象创建过程"><a href="#对象创建过程" class="headerlink" title="对象创建过程"></a>对象创建过程</h3><p>当我们使用 new 关键字创建一个对象时，JVM 首先会检查 new 指令的参数是否能在常量池中定位到类的符号引用，然后检查这个符号引用代表的类是否已被加载、解析和初始化。如果没有，就先执行类加载。</p>
+<p>如果已经加载，JVM 会为对象分配内存完成初始化，比如数值类型的成员变量初始值是 0，布尔类型是 false，对象类型是 null。</p>
+<p>接下来会设置对象头，里面包含了对象是哪个类的实例、对象的哈希码、对象的 GC 分代年龄等信息。</p>
+<p>最后，JVM 会执行构造方法 <init> 完成赋值操作，将成员变量赋值为预期的值，比如 int age &#x3D; 18，这样一个对象就创建完成了。</p>
+<h3 id="JVM的垃圾回收机制"><a href="#JVM的垃圾回收机制" class="headerlink" title="JVM的垃圾回收机制"></a>JVM的垃圾回收机制</h3><p>垃圾回收就是对内存堆中已经死亡的或者长时间没有使用的对象进行清除或回收。</p>
+<p>JVM 在做 GC 之前，会先搞清楚什么是垃圾，什么不是垃圾，通常会通过可达性分析算法来判断对象是否存活。</p>
+<p>在确定了哪些垃圾可以被回收后，垃圾收集器（如 CMS、G1、ZGC）要做的事情就是进行垃圾回收，可以采用标记清除算法、复制算法、标记整理算法、分代收集算法等。</p>
+<h3 id="如何判断对象仍然存活？"><a href="#如何判断对象仍然存活？" class="headerlink" title="如何判断对象仍然存活？"></a>如何判断对象仍然存活？</h3><h4 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h4><p>Java 通过可达性分析算法来判断一个对象是否还存活。<br>通过一组名为 “GC Roots” 的根对象，进行递归扫描，无法从根对象到达的对象就是“垃圾”，可以被回收。<br>这也是 G1、CMS 等主流垃圾收集器使用的主要算法。</p>
+<h4 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h4><p>每个对象有一个引用计数器，记录引用它的次数。当计数器为零时，对象可以被回收。<br>引用计数法无法解决循环引用的问题。例如，两个对象互相引用，但不再被其他对象引用，它们的引用计数都不为零，因此不会被回收。</p>
+<h3 id="垃圾回收算法有哪些？"><a href="#垃圾回收算法有哪些？" class="headerlink" title="垃圾回收算法有哪些？"></a>垃圾回收算法有哪些？</h3><p>垃圾收集算法主要有三种，分别是标记-清除算法、标记-复制算法和标记-整理算法。</p>
+<h4 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h4><p>标记清除算法，是将垃圾回收分为2个阶段，分别是标记和清除。<br>1.根据可达性分析算法得出的垃圾进行标记<br>2.对这些标记为可回收的内容进行垃圾回收</p>
+<img src="2025/09/07/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JVM/clean.png" class="" title="This is an example image">
+
+<p>标记清除算法解决了引用计数算法中的循环引用的问题，没有从root节点引用的对象都会被回收。<br>同样，标记清除算法也是有缺点的：</p>
+<ul>
+<li>效率较低，标记和清除两个动作都需要遍历所有的对象，并且在GC时，需要停止应用程序，对于交互性要求比较高的应用而言这个体验是非常差的。</li>
+<li>（重要）通过标记清除算法清理出来的内存，碎片化较为严重，因为被回收的对象可能存在于内存的各个角落，所以清理出来的内存是不连贯的。</li>
+</ul>
+<h4 id="标记-复制算法"><a href="#标记-复制算法" class="headerlink" title="标记-复制算法"></a>标记-复制算法</h4><p>复制算法的核心就是，将原有的内存空间一分为二，每次只用其中的一块，在垃圾回收时，将正在使用的对象复制到另一个内存空间中，然后将该内存空间清空，交换两个内存的角色，完成垃圾的回收。<br>如果内存中的垃圾对象较多，需要复制的对象就较少，这种情况下适合使用该方式并且效率比较高，反之，则不适合。 </p>
+<img src="2025/09/07/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JVM/copy.png" class="" title="This is an example image">
+
+<p>1）将内存区域分成两部分，每次操作其中一个。<br>2）当进行垃圾回收时，将正在使用的内存区域中的存活对象移动到未使用的内存区域。当移动完对这部分内存区域一次性清除。<br>3）周而复始。<br>优点：</p>
+<ul>
+<li>在垃圾对象多的情况下，效率较高</li>
+<li>清理后，内存无碎片<br>缺点：</li>
+<li>分配的2块内存空间，在同一个时刻，只能使用一半，内存使用率较低</li>
+</ul>
+<h4 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h4><p>标记整理算法是在标记清除算法的基础之上，做了优化改进的算法。和标记清除算法一样，也是从根节点开始，对对象的引用进行标记，在清理阶段，并不是简单的直接清理可回收对象，而是将存活对象都向内存另一端移动，然后清理边界以外的垃圾，从而解决了碎片化的问题。</p>
+<img src="2025/09/07/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JVM/arrange.png" class="" title="This is an example image">
+
+<p>1）标记垃圾。<br>2）需要清除向右边走，不需要清除的向左边走。<br>3）清除边界以外的垃圾。<br>优缺点同标记清除算法，解决了标记清除算法的碎片化的问题，同时，标记整理算法多了一步，对象移动内存位置的步骤，其效率也有有一定的影响。<br>与复制算法对比：复制算法标记完就复制，但标记整理算法得等把所有存活对象都标记完毕，再进行整理。</p>
+<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>在java8时，堆被分为了两份：新生代和老年代【1：2】，在java7时，还存在一个永久代。<br>新生代用复制算法，因为大部分对象生命周期短。老年代用标记-整理算法，因为对象存活率较高。</p>
+<img src="2025/09/07/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JVM/age.png" class="" title="This is an example image">
+
+<p>对于新生代，内部又被分为了三个区域。Eden区，S0区，S1区【8：1：1】</p>
+<h4 id="工作机制"><a href="#工作机制" class="headerlink" title="工作机制"></a>工作机制</h4><ul>
+<li>新创建的对象，都会先分配到eden区</li>
+<li>当eden内存不足，标记eden与 from（现阶段没有）的存活对象</li>
+<li>将存活对象采用复制算法复制到 to 中，复制完毕后，eden和 from 内存都得到释放</li>
+<li>经过一段时间后eden的内存又出现不足，标记eden区域to区存活的对象，将存活的对象复制到from区</li>
+<li>当幸存区对象熬过几次回收（最多15次），晋升到老年代（幸存区内存不足或大对象会导致提前晋升）</li>
+</ul>
+<h3 id="知道哪些垃圾收集器？"><a href="#知道哪些垃圾收集器？" class="headerlink" title="知道哪些垃圾收集器？"></a>知道哪些垃圾收集器？</h3><p>JVM 的垃圾收集器主要分为两大类：分代收集器和分区收集器，分代收集器的代表是 CMS，分区收集器的代表是 G1 和 ZGC。</p>
+<p>CMS 是第一个关注 GC 停顿时间的垃圾收集器，JDK 1.5 时引入，JDK9 被标记弃用，JDK14 被移除。</p>
+<p>G1 在 JDK 1.7 时引入，在 JDK 9 时取代 CMS 成为了默认的垃圾收集器。</p>
+<p>ZGC 是 JDK11 推出的一款低延迟垃圾收集器，适用于大内存低延迟服务的内存管理和回收，在 128G 的大堆下，最大停顿时间才 1.68 ms，性能远胜于 G1 和 CMS。</p>
+<h3 id="CMS的垃圾收集过程"><a href="#CMS的垃圾收集过程" class="headerlink" title="CMS的垃圾收集过程"></a>CMS的垃圾收集过程</h3><p>CMS 使用标记-清除算法进行垃圾收集，分 4 大步：</p>
+<p>初始标记：标记所有从 GC Roots 直接可达的对象，这个阶段需要 STW，但速度很快。<br>并发标记：从初始标记的对象出发，遍历所有对象，标记所有可达的对象。这个阶段是并发进行的。<br>重新标记：完成剩余的标记工作，包括处理并发阶段遗留下来的少量变动，这个阶段通常需要短暂的 STW 停顿。<br>并发清除：清除未被标记的对象，回收它们占用的内存空间。</p>
+<h3 id="G1垃圾收集器"><a href="#G1垃圾收集器" class="headerlink" title="G1垃圾收集器"></a>G1垃圾收集器</h3><p>G1 在 JDK 1.7 时引入，在 JDK 9 时取代 CMS 成为默认的垃圾收集器。</p>
+<p>G1 把 Java 堆划分为多个大小相等的独立区域Region，每个区域都可以扮演新生代或老年代的角色。</p>
+<p>同时，G1 还有一个专门为大对象设计的 Region，叫 Humongous 区。</p>
+<p>大对象的判定规则是，如果一个大对象超过了一个 Region 大小的 50%，比如每个 Region 是 2M，只要一个对象超过了 1M，就会被放入 Humongous 中。</p>
+<p>这种区域化管理使得 G1 可以更灵活地进行垃圾收集，只回收部分区域而不是整个新生代或老年代。</p>
+<p>G1 收集器的运行过程大致可划分为这几个步骤：</p>
+<p>①、并发标记，G1 通过并发标记的方式找出堆中的垃圾对象。并发标记阶段与应用线程同时执行，不会导致应用线程暂停。</p>
+<p>②、混合收集，在并发标记完成后，G1 会计算出哪些区域的回收价值最高（也就是包含最多垃圾的区域），然后优先回收这些区域。这种回收方式包括了部分新生代区域和老年代区域。</p>
+<p>选择回收成本低而收益高的区域进行回收，可以提高回收效率和减少停顿时间。</p>
+<p>③、可预测的停顿，G1 在垃圾回收期间仍然需要「Stop the World」。不过，G1 在停顿时间上添加了预测机制，用户可以 JVM 启动时指定期望停顿时间，G1 会尽可能地在这个时间内完成垃圾回收。</p>
+<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>JVM 的操作对象是 Class 文件，JVM 把 Class 文件中描述类的数据结构加载到内存中，并对数据进行校验、解析和初始化，最终转化成可以被 JVM 直接使用的类型，这个过程被称为类加载机制。</p>
+<p>其中最重要的三个概念就是：类加载器、类加载过程和双亲委派模型。</p>
+<p>类加载器：负责加载类文件，将类文件加载到内存中，生成 Class 对象。<br>类加载过程：包括加载、验证、准备、解析和初始化等步骤。<br>双亲委派模型：当一个类加载器接收到类加载请求时，它会把请求委派给父——类加载器去完成，依次递归，直到最顶层的类加载器，如果父——类加载器无法完成加载请求，子类加载器才会尝试自己去加载。</p>
+<h4 id="类加载器有哪些？"><a href="#类加载器有哪些？" class="headerlink" title="类加载器有哪些？"></a>类加载器有哪些？</h4><p>主要有四种：</p>
+<p>①、启动类加载器，负责加载 JVM 的核心类库，如 rt.jar 和其他核心库位于JAVA_HOME&#x2F;jre&#x2F;lib目录下的类。</p>
+<p>②、扩展类加载器，负责加载JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;ext目录下，或者由系统属性java.ext.dirs指定位置的类库，由sun.misc.Launcher$ExtClassLoader 实现。</p>
+<p>③、应用程序类加载器，负责加载 classpath 的类库，由sun.misc.Launcher$AppClassLoader实现。</p>
+<p>我们编写的任何类都是由应用程序类加载器加载的，除非显式使用自定义类加载器。</p>
+<p>④、用户自定义类加载器，通常用于加载网络上的类、执行热部署（动态加载和替换应用程序的组件），或者为了安全考虑，从不同的源加载类。</p>
+<p>通过继承java.lang.ClassLoader类来实现。</p>
+<h4 id="类加载的过程"><a href="#类加载的过程" class="headerlink" title="类加载的过程"></a>类加载的过程</h4><p>类装载过程包括三个阶段：载入、链接和初始化。</p>
+<p>①、载入：将类的二进制字节码加载到内存中。</p>
+<p>②、链接可以细分为三个小的阶段：</p>
+<p>验证：检查类文件格式是否符合 JVM 规范<br>准备：为类的静态变量分配内存并设置默认值。<br>解析：将符号引用替换为直接引用。<br>③、初始化：执行静态代码块和静态变量初始化。</p>
+<p>在准备阶段，静态变量已经被赋过默认初始值了，在初始化阶段，静态变量将被赋值为代码期望赋的值。比如说 static int a &#x3D; 1;，在准备阶段，a 的值为 0，在初始化阶段，a 的值为 1。</p>
+<p>换句话说，初始化阶段是在执行类的构造方法，也就是 javap 中看到的 <clinit>()。</p>
+<h4 id="什么是双亲委派模型？"><a href="#什么是双亲委派模型？" class="headerlink" title="什么是双亲委派模型？"></a>什么是双亲委派模型？</h4><p>双亲委派模型要求类加载器在加载类时，先委托父加载器尝试加载，只有父加载器无法加载时，子加载器才会加载。</p>
+<p>这个过程会一直向上递归，也就是说，从子加载器到父加载器，再到更上层的加载器，一直到最顶层的启动类加载器。</p>
+<p>启动类加载器会尝试加载这个类。如果它能够加载这个类，就直接返回；如果它不能加载这个类，就会将加载任务返回给委托它的子加载器。</p>
+<p>子加载器尝试加载这个类。如果子加载器也无法加载这个类，它就会继续向下传递这个加载任务，依此类推。</p>
+<p>直到某个加载器能够加载这个类，或者所有加载器都无法加载这个类，最终抛出 ClassNotFoundException。</p>
+<p>使用双亲委派模型的两个原因：<br>①、避免类的重复加载：父加载器加载的类，子加载器无需重复加载。</p>
+<p>②、保证核心类库的安全性：如 java.lang.* 只能由 Bootstrap ClassLoader 加载，防止被篡改。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Study/"># Study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../15/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94MySQL/">今日八股—MySQL</a>
+            
+            
+            <a class="next" rel="next" href="../../01/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JavaSE/">今日八股—JavaSE</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

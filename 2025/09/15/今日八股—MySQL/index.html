@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="wuli韬">
+
+
+
+
+
+<title>今日八股—MySQL | 韬的博客</title>
+
+
+
+    <link rel="icon" href="../../../../favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="../../../../css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="../../../../js/script.js"></script>
+    
+    <script src="../../../../js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <script>
+        !
+            function () {
+                function n(n, e, t) {
+                    return n.getAttribute(e) || t
+                }
+                function e(n) {
+                    return document.getElementsByTagName(n)
+                }
+                function t() {
+                    var t = e("script"),
+                        o = t.length,
+                        i = t[o - 1];
+                    return {
+                        l: o,
+                        z: n(i, "zIndex", -1), //置于主页面背后
+                        o: n(i, "opacity", .5), //线条透明度
+                        c: n(i, "color", "0,0,0"), //线条颜色
+                        n: n(i, "count", 100) //线条数量
+                    }
+                }
+                function o() {
+                    a = m.width = window.innerWidth ||
+                        document.documentElement.clientWidth || document.body.clientWidth,
+                        c = m.height = window.innerHeight ||
+                        document.documentElement.clientHeight || document.body.clientHeight
+                }
+                function i() {
+                    r.clearRect(0, 0, a, c);
+                    var n, e, t, o, m, l;
+                    s.forEach(function (i, x) {
+                        for (i.x += i.xa, i.y += i.ya, i.xa *= i.x > a || i.x < 0 ? -1 :
+                            1, i.ya *= i.y > c || i.y < 0 ? -1 : 1, r.fillRect(i.x - .5, i.y - .5, 1,
+                                1), e = x + 1; e < u.length; e++) n = u[e],
+                                    null !== n.x && null !== n.y && (o = i.x - n.x, m = i.y - n.y, l
+                                        = o * o + m * m, l < n.max && (n === y && l >= n.max / 2 && (i.x -= .03 * o,
+                                            i.y -= .03 * m), t = (n.max - l) / n.max, r.beginPath(), r.lineWidth = t /
+                                            2, r.strokeStyle = "rgba(" + d.c + "," + (t + .2) + ")", r.moveTo(i.x, i.y),
+                                            r.lineTo(n.x, n.y), r.stroke()))
+                    }),
+                        x(i)
+                }
+                var a, c, u, m = document.createElement("canvas"),
+                    d = t(),
+                    l = "c_n" + d.l,
+                    r = m.getContext("2d"),
+                    x = window.requestAnimationFrame || window.webkitRequestAnimationFrame
+                        || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                        window.msRequestAnimationFrame ||
+                        function (n) {
+                            window.setTimeout(n, 1e3 / 45)
+                        },
+                    w = Math.random,
+                    y = {
+                        x: null,
+                        y: null,
+                        max: 2e4
+                    };
+                m.id = l,
+                    m.style.cssText = "position:fixed;top:0;left:0;z-index:" + d.z +
+                    ";opacity:" + d.o,
+                    e("body")[0].appendChild(m),
+                    o(),
+                    window.onresize = o,
+                    window.onmousemove = function (n) {
+                        n = n || window.event,
+                            y.x = n.clientX,
+                            y.y = n.clientY
+                    },
+                    window.onmouseout = function () {
+                        y.x = null,
+                            y.y = null
+                    };
+                for (var s = [], f = 0; d.n > f; f++) {
+                    var h = w() * a,
+                        g = w() * c,
+                        v = 2 * w() - 1,
+                        p = 2 * w() - 1;
+                    s.push({
+                        x: h,
+                        y: g,
+                        xa: v,
+                        ya: p,
+                        max: 6e3
+                    })
+                }
+                u = s.concat([y]),
+                    setTimeout(function () {
+                        i()
+                    },
+                        100)
+            }();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/hexo_blog/">Tao&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/hexo_blog/">Tao&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="../../../../archives">Posts</a>
+                
+                <a class="menu-item" href="../../../../category">Categories</a>
+                
+                <a class="menu-item" href="../../../../tag">Tags</a>
+                
+                <a class="menu-item" href="../../../../about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">今日八股—MySQL</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="../../../../index.html">wuli韬</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 15, 2025&nbsp;&nbsp;17:13:12</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="../../../../categories/%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0/">学习日记</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="两张表怎么进行连接？"><a href="#两张表怎么进行连接？" class="headerlink" title="两张表怎么进行连接？"></a>两张表怎么进行连接？</h3><p>可以通过内连接 inner join、外连接 outer join、交叉连接 cross join 来合并多个表的查询结果。</p>
+<h4 id="什么是内连接？"><a href="#什么是内连接？" class="headerlink" title="什么是内连接？"></a>什么是内连接？</h4><p>内连接用于返回两个表中有匹配关系的行。假设有两张表，用户表和订单表，想查询有订单的用户，就可以使用内连接 users INNER JOIN orders，按照用户 ID 关联就行了。<br>只有那些在两个表中都存在 user_id 的记录才会出现在查询结果中。</p>
+<h4 id="什么是外连接？"><a href="#什么是外连接？" class="headerlink" title="什么是外连接？"></a>什么是外连接？</h4><p>和内连接不同，外连接不仅返回两个表中匹配的行，还返回没有匹配的行，用 null 来填充。</p>
+<p>外连接又分为左外连接 left join 和右外连接 right join。</p>
+<p>left join 会保留左表中符合条件的所有记录，如果右表中有匹配的记录，就返回匹配的记录，否则就用 null 填充，常用于某表中有，但另外一张表中可能没有的数据的查询场景。</p>
+<p>假设要查询所有用户及他们的订单，即使用户没有下单，就可以使用左连接</p>
+<p>右连接就是左连接的镜像，right join 会保留右表中符合条件的所有记录，如果左表中有匹配的记录，就返回匹配的记录，否则就用 null 填充。</p>
+<h4 id="什么是交叉连接？"><a href="#什么是交叉连接？" class="headerlink" title="什么是交叉连接？"></a>什么是交叉连接？</h4><p>交叉连接会返回两张表的笛卡尔积，也就是将左表的每一行与右表的每一行进行组合，返回的行数是两张表行数的乘积。</p>
+<p>假设有 A 表和 B 表，A 表有 2 行数据，B 表有 3 行数据，那么交叉连接的结果就是 2 ✖️ 3 &#x3D; 6 行。</p>
+<h4 id="内连接、左连接、右连接的区别？"><a href="#内连接、左连接、右连接的区别？" class="headerlink" title="内连接、左连接、右连接的区别？"></a>内连接、左连接、右连接的区别？</h4><p>MySQL 的连接主要分为内连接和外连接，外连接又可以分为左连接和右连接。</p>
+<p>内连接可以用来找出两个表中共同的记录，相当于两个数据集的交集。</p>
+<p>左连接和右连接可以用来找出两个表中不同的记录，相当于两个数据集的并集。两者的区别是，左连接会保留左表中符合条件的所有记录，右连接则刚好相反。</p>
+<h3 id="drop、delect、truncate的区别？"><a href="#drop、delect、truncate的区别？" class="headerlink" title="drop、delect、truncate的区别？"></a>drop、delect、truncate的区别？</h3><p>DROP 是物理删除，用来删除整张表，包括表结构，且不能回滚。</p>
+<p>DELETE 支持行级删除，可以带 WHERE 条件，可以回滚。</p>
+<p>TRUNCATE 用于清空表中的所有数据，但会保留表结构，不能回滚。</p>
+<h3 id="查询语句的执行顺序？"><a href="#查询语句的执行顺序？" class="headerlink" title="查询语句的执行顺序？"></a>查询语句的执行顺序？</h3><p>先执行 FROM 确定主表，再执行 JOIN 连接，然后 WHERE 进行过滤，接着 GROUP BY 进行分组，HAVING 过滤聚合结果，SELECT 选择最终列，ORDER BY 排序，最后 LIMIT 限制返回行数。</p>
+<p>WHERE 先执行是为了减少数据量，HAVING 只能过滤聚合数据，ORDER BY 必须在 SELECT 之后排序最终结果，LIMIT 最后执行以减少数据传输。</p>
+<img src="2025/09/15/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94MySQL/sentence.png" class="" title="This is an example image">
+
+
+<h3 id="MySQL函数"><a href="#MySQL函数" class="headerlink" title="MySQL函数"></a>MySQL函数</h3><p>处理字符串的函数：<br>CONCAT(): 用于连接两个或多个字符串。<br>LENGTH(): 用于返回字符串的长度。<br>SUBSTRING(): 从字符串中提取子字符串。<br>REPLACE(): 替换字符串中的某部分。<br>TRIM(): 去除字符串两侧的空格或其他指定字符。</p>
+<p>处理数字的函数：<br>ABS(): 返回一个数的绝对值。<br>ROUND(): 四舍五入到指定的小数位数。<br>MOD(): 返回除法操作的余数。</p>
+<p>日期和时间处理函数：<br>NOW(): 返回当前的日期和时间。<br>CURDATE(): 返回当前的日期。</p>
+<p>汇总函数：<br>SUM(): 计算数值列的总和。<br>AVG(): 计算数值列的平均值。<br>COUNT(): 计算某列的行数。</p>
+<p>逻辑函数：<br>IF(): 如果条件为真，则返回一个值；否则返回另一个值。<br>CASE: 根据一系列条件返回值。</p>
+<h3 id="一条查询语句是如何执行的？"><a href="#一条查询语句是如何执行的？" class="headerlink" title="一条查询语句是如何执行的？"></a>一条查询语句是如何执行的？</h3><p>第一步，客户端发送 SQL 查询语句到 MySQL 服务器。</p>
+<p>第二步，MySQL 服务器的连接器开始处理这个请求，跟客户端建立连接、获取权限、管理连接。</p>
+<p>第三步，解析器对 SQL 语句进行解析，检查语句是否符合 SQL 语法规则，确保数据库、表和列都是存在的，并处理 SQL 语句中的名称解析和权限验证。</p>
+<p>第四步，优化器负责确定 SQL 语句的执行计划，这包括选择使用哪些索引，以及决定表之间的连接顺序等。</p>
+<p>第五步，执行器会调用存储引擎的 API 来进行数据的读写。</p>
+<p>第六步，存储引擎负责查询数据，并将执行结果返回给客户端。客户端接收到查询结果，完成这次查询请求。</p>
+<h3 id="MySQL日志文件有哪些？"><a href="#MySQL日志文件有哪些？" class="headerlink" title="MySQL日志文件有哪些？"></a>MySQL日志文件有哪些？</h3><p>有 6 大类，其中错误日志用于问题诊断，慢查询日志用于 SQL 性能分析，general log 用于记录所有的 SQL 语句，binlog 用于主从复制和数据恢复，redo log 用于保证事务持久性，undo log 用于事务回滚和 MVCC。</p>
+<p>①错误日志（Error Log）：记录 MySQL 服务器启动、运行或停止时出现的问题。</p>
+<p>②慢查询日志（Slow Query Log）：记录执行时间超过 long_query_time 值的所有 SQL 语句。这个时间值是可配置的，默认情况下，慢查询日志功能是关闭的。</p>
+<p>③一般查询日志（General Query Log）：记录 MySQL 服务器的启动关闭信息，客户端的连接信息，以及更新、查询的 SQL 语句等。</p>
+<p>④二进制日志（Binary Log）：记录所有修改数据库状态的 SQL 语句，以及每个语句的执行时间，如 INSERT、UPDATE、DELETE 等，但不包括 SELECT 和 SHOW 这类的操作。</p>
+<p>⑤重做日志（Redo Log）：记录对于 InnoDB 表的每个写操作，不是 SQL 级别的，而是物理级别的，主要用于崩溃恢复。</p>
+<p>⑥回滚日志（Undo Log，或者叫事务日志）：记录数据被修改前的值，用于事务的回滚。</p>
+<h3 id="什么是聚簇索引什么是非聚簇索引？"><a href="#什么是聚簇索引什么是非聚簇索引？" class="headerlink" title="什么是聚簇索引什么是非聚簇索引？"></a>什么是聚簇索引什么是非聚簇索引？</h3><p>聚簇索引是指数据与索引放在一起，B+树的叶子节点保存了整行数据，通常只有一个聚簇索引，一般是由主键构成。<br>非聚簇索引则是数据与索引分开存储，B+树的叶子节点保存的是主键值，可以有多个非聚簇索引，通常我们自定义的索引都是非聚簇索引。</p>
+<h3 id="什么是回表查询？"><a href="#什么是回表查询？" class="headerlink" title="什么是回表查询？"></a>什么是回表查询？</h3><p>回表查询是指通过二级索引找到对应的主键值，然后再通过主键值查询聚簇索引中对应的整行数据的过程。</p>
+<h3 id="什么是联合索引？"><a href="#什么是联合索引？" class="headerlink" title="什么是联合索引？"></a>什么是联合索引？</h3><p>联合索引就是把多个字段放在一个索引里，但必须遵守“最左前缀”原则，只有从第一个字段开始连续使用，索引才会生效。</p>
+<h3 id="什么是覆盖索引？"><a href="#什么是覆盖索引？" class="headerlink" title="什么是覆盖索引？"></a>什么是覆盖索引？</h3><p>覆盖索引是指在SELECT查询中，返回的列全部能在索引中找到，避免了回表查询，提高了性能。使用覆盖索引可以减少对主键索引的查询次数，提高查询效率。</p>
+<h3 id="什么是索引下堆？"><a href="#什么是索引下堆？" class="headerlink" title="什么是索引下堆？"></a>什么是索引下堆？</h3><p>将部分过滤条件从MySQL服务器层下推到存储引擎层执行，减少不必要的数据回表或数据读取。</p>
+<h3 id="索引的分类"><a href="#索引的分类" class="headerlink" title="索引的分类"></a>索引的分类</h3><p>从功能上分类的话，有主键索引、唯一索引、全文索引；从数据结构上分类的话，有 B+ 树索引、哈希索引；从存储内容上分类的话，有聚簇索引、非聚簇索引。</p>
+<h3 id="索引创建原则有哪些？"><a href="#索引创建原则有哪些？" class="headerlink" title="索引创建原则有哪些？"></a>索引创建原则有哪些？</h3><ul>
+<li>表中的数据量超过10万以上时考虑创建索引。</li>
+<li>选择查询频繁的字段作为索引，如查询条件、排序字段或分组字段。</li>
+<li>尽量使用复合索引，覆盖SQL的返回值。</li>
+<li>如果字段区分度不高，可以将其放在组合索引的后面。</li>
+<li>对于内容较长的字段，考虑使用前缀索引。</li>
+<li>控制索引数量，因为索引虽然可以提高查询速度，但也会影响插入、更新的速度。</li>
+</ul>
+<h3 id="什么情况下索引会失效？"><a href="#什么情况下索引会失效？" class="headerlink" title="什么情况下索引会失效？"></a>什么情况下索引会失效？</h3><ul>
+<li>没有遵循最左匹配原则。</li>
+<li>使用了模糊查询且%号在前面。</li>
+<li>在索引字段上进行了运算或类型转换。</li>
+<li>使用了复合索引但在中间使用了范围查询，导致右边的条件索引失效。</li>
+</ul>
+<h3 id="SQL优化经验有哪些？"><a href="#SQL优化经验有哪些？" class="headerlink" title="SQL优化经验有哪些？"></a>SQL优化经验有哪些？</h3><ul>
+<li>建表时选择合适的字段类型。</li>
+<li>使用索引，遵循创建索引的原则。</li>
+<li>编写高效的SQL语句，比如避免使用SELECT *，尽量使用UNION ALL代替UNION，以及在表关联时使用INNER JOIN。</li>
+<li>采用主从复制和读写分离提高性能。</li>
+<li>在数据量大时考虑分库分表。</li>
+</ul>
+<h3 id="为什么InnoDB要使用B-树作为索引？"><a href="#为什么InnoDB要使用B-树作为索引？" class="headerlink" title="为什么InnoDB要使用B+树作为索引？"></a>为什么InnoDB要使用B+树作为索引？</h3><p>相比哈希表：B+ 树支持范围查询和排序。<br>相比二叉树和红黑树：B+ 树更“矮胖”，层级更少，磁盘 IO 次数更少。<br>相比 B 树：B+ 树的非叶子节点只存储键值，叶子节点存储数据并通过链表连接，支持范围查询。</p>
+<h3 id="为什么用B-树而不是B树？"><a href="#为什么用B-树而不是B树？" class="headerlink" title="为什么用B+树而不是B树？"></a>为什么用B+树而不是B树？</h3><p>第一，B 树的每个节点既存储键值，又存储数据和指针，导致单节点存储的键值数量较少。<br>一个 16KB 的 InnoDB 页，如果数据较大，B 树的非叶子节点只能容纳几十个键值，而 B+ 树的非叶子节点可以容纳上千个键值。</p>
+<p>第二，B 树的范围查询需要通过中序遍历逐层回溯；而 B+ 树的叶子节点通过双向链表顺序连接，范围查询只需定位起始点后顺序遍历链表即可，没有回溯开销。</p>
+<p>第三，B 树的数据可能存储在任意节点，假如目标数据恰好位于根节点或上层节点，查询仅需 1-2 次 I&#x2F;O；但如果数据位于底层节点，则需多次 I&#x2F;O，导致查询时间波动较大。</p>
+<h3 id="MySQL中有哪几种锁？"><a href="#MySQL中有哪几种锁？" class="headerlink" title="MySQL中有哪几种锁？"></a>MySQL中有哪几种锁？</h3><p>MySQL 中有多种类型的锁，可以从不同维度来分类，按锁粒度划分的话，有表锁、行锁。</p>
+<p>按照加锁机制划分的话，有乐观锁和悲观锁。按照兼容性划分的话，有共享锁和排他锁。</p>
+<p>表锁：锁定整个表，资源开销小，加锁快，但并发度低，不会出现死锁；适合查询为主、少量更新的场景（如 MyISAM 引擎）。<br>再细分的话，有表共享读锁（S锁）：允许多个事务同时读，但阻塞写操作；表独占写锁（X锁）：独占表，阻塞其他事务的读写。<br>行锁：锁定单行或多行，开销大、加锁慢，可能出现死锁，但并发度高（InnoDB 默认支持）。<br>再细分的话，有记录锁（Record Lock）：锁定索引中的具体记录；间隙锁（Gap Lock）：锁定索引记录之间的间隙，防止幻读；临键锁（Next-Key Lock）：结合记录锁和间隙锁，锁定一个左开右闭的区间（如 (5, 10]）。<br>共享锁（S锁&#x2F;读锁），允许多个事务同时读取数据，但阻塞写操作。<br>排他锁（X锁&#x2F;写锁），独占数据，阻塞其他事务的读写。<br>乐观锁假设冲突少，通过版本号或 CAS 机制检测冲突。<br>悲观锁假设并发冲突频繁，先加锁再操作。</p>
+<h3 id="MySQL事务的四大特性"><a href="#MySQL事务的四大特性" class="headerlink" title="MySQL事务的四大特性"></a>MySQL事务的四大特性</h3><p>事务是一条或多条 SQL 语句组成的执行单元。四个特性分别是原子性、一致性、隔离性和持久性。原子性保证事务中的操作要么全部执行、要么全部失败；一致性保证数据从事务开始前的一个一致状态转移到结束后的另外一个一致状态；隔离性保证并发事务之间互不干扰；持久性保证事务提交后数据不会丢失。</p>
+<p>ACID 中的原子性主要通过 Undo Log 来实现，持久性通过 Redo Log 来实现，隔离性由 MVCC 和锁机制来实现，一致性则由其他三大特性共同保证。</p>
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><p>隔离级别定义了一个事务可能受其他事务影响的程度，MySQL 支持四种隔离级别，分别是：读未提交、读已提交、可重复读和串行化。</p>
+<h4 id="读未提交"><a href="#读未提交" class="headerlink" title="读未提交"></a>读未提交</h4><p>事务可以读取其他未提交事务修改的数据。也就是说，如果未提交的事务一旦回滚，读取到的数据就会变成了“脏数据”，通常不会使用。</p>
+<h4 id="读已提交"><a href="#读已提交" class="headerlink" title="读已提交"></a>读已提交</h4><p>读已提交避免了脏读，但可能会出现不可重复读，即同一事务内多次读取同一数据结果会不同，因为其他事务提交的修改，对当前事务是可见的。</p>
+<h4 id="可重复读"><a href="#可重复读" class="headerlink" title="可重复读"></a>可重复读</h4><p>可重复读能确保同一事务内多次读取相同数据的结果一致，即使其他事务已提交修改。</p>
+<h4 id="串行化"><a href="#串行化" class="headerlink" title="串行化"></a>串行化</h4><p>串行化是最高的隔离级别，通过强制事务串行执行来解决“幻读”问题。</p>
+<h3 id="MVCC了解吗？"><a href="#MVCC了解吗？" class="headerlink" title="MVCC了解吗？"></a>MVCC了解吗？</h3><ul>
+<li>事务的隔离性通过锁和多版本并发控制（MVCC）来保证。MVCC通过维护数据的多个版本来避免读写冲突。底层实现包括隐藏字段、undo log和read view。隐藏字段包括trx_id和roll_pointer。undo log记录了不同版本的数据，通过roll_pointer形成版本链。read view定义了不同隔离级别下的快照读，决定了事务访问哪个版本的数据。</li>
+</ul>
+<p>MVCC 指的是多版本并发控制，每次修改数据时，都会生成一个新的版本，而不是直接在原有数据上进行修改。并且每个事务只能看到在它开始之前已经提交的数据版本。</p>
+<p>这样的话，读操作就不会阻塞写操作，写操作也不会阻塞读操作，从而避免加锁带来的性能损耗。</p>
+<p>其底层实现主要依赖于 Undo Log 和 Read View。</p>
+<p>每次修改数据前，先将记录拷贝到Undo Log，并且每条记录会包含三个隐藏列，DB_TRX_ID 用来记录修改该行的事务 ID，DB_ROLL_PTR 用来指向 Undo Log 中的前一个版本，DB_ROW_ID 用来唯一标识该行数据（仅无主键时生成）。</p>
+<p>每次读取数据时，都会生成一个 ReadView，其中记录了当前活跃事务的 ID 集合、最小事务 ID、最大事务 ID 等信息，通过与 DB_TRX_ID 进行对比，判断当前事务是否可以看到该数据版本。</p>
+<h4 id="什么是版本链？"><a href="#什么是版本链？" class="headerlink" title="什么是版本链？"></a>什么是版本链？</h4><p>版本链是指 InnoDB 中同一条记录的多个历史版本，通过 DB_ROLL_PTR 字段将它们像链表一样串起来，用来支持 MVCC 的快照读。</p>
+<p>当更新一行数据时，InnoDB 不会直接覆盖原有数据，而是创建一个新的数据版本，并更新 DB_TRX_ID 和 DB_ROLL_PTR，使它们指向前一个版本和相关的 undo 日志。</p>
+<p>这样，老版本的数据就不会丢失，可以通过版本链找到。</p>
+<h4 id="什么是ReadView？"><a href="#什么是ReadView？" class="headerlink" title="什么是ReadView？"></a>什么是ReadView？</h4><p>ReadView 是 InnoDB 为每个事务创建的一份“可见性视图”，用于判断在执行快照读时，哪些数据版本是当前这个事务可以看到的，哪些不能看到。</p>
+<p>当事务开始执行时，InnoDB 会为该事务创建一个 ReadView，这个 ReadView 会记录 4 个重要的信息：</p>
+<p>creator_trx_id：创建该 ReadView 的事务 ID。<br>m_ids：所有活跃事务的 ID 列表，活跃事务是指那些已经开始但尚未提交的事务。<br>min_trx_id：所有活跃事务中最小的事务 ID。它是 m_ids 数组中最小的事务 ID。<br>max_trx_id ：事务 ID 的最大值加一。换句话说，它是下一个将要生成的事务 ID。</p>
+<p>ReadView通过三个步骤来判断：<br>①如果某个数据版本的 DB_TRX_ID 小于 min_trx_id，则该数据版本在生成 ReadView 之前就已经提交，因此对当前事务是可见的。</p>
+<p>②如果 DB_TRX_ID 大于 max_trx_id，则表示创建该数据版本的事务在生成 ReadView 之后开始，因此对当前事务不可见。</p>
+<p>③如果 DB_TRX_ID 在 min_trx_id 和 max_trx_id 之间，需要判断 DB_TRX_ID 是否在 m_ids 列表中：</p>
+<p>不在，表示创建该数据版本的事务在生成 ReadView 之后已经提交，因此对当前事务也是可见的。<br>在，表示事务仍然活跃，或者在当前事务生成 ReadView 之后才开始，因此是不可见的。</p>
+<h4 id="可重复读和读已提交在ReadView上的区别是什么？"><a href="#可重复读和读已提交在ReadView上的区别是什么？" class="headerlink" title="可重复读和读已提交在ReadView上的区别是什么？"></a>可重复读和读已提交在ReadView上的区别是什么？</h4><p>可重复读：在第一次读取数据时生成一个 ReadView，这个 ReadView 会一直保持到事务结束，这样可以保证在事务中多次读取同一行数据时，读取到的数据是一致的。</p>
+<p>读已提交：每次读取数据前都生成一个 ReadView，这样就能保证每次读取的数据都是最新的。</p>
+<h3 id="主从复制原理"><a href="#主从复制原理" class="headerlink" title="主从复制原理"></a>主从复制原理</h3><p>MySQL 的主从复制是一种数据同步机制，用于将数据从主数据库复制到一个或多个从数据库。</p>
+<p>主库执行事务提交时，将数据变更以事件形式记录到 Binlog。从库通过 I&#x2F;O 线程从主库的 Binlog 中读取变更事件，并将这些事件写入到本地的中继日志文件中，SQL 线程会实时监控中继日志的内容，按顺序读取并执行这些事件，从而保证从库与主库数据一致。</p>
+<h3 id="怎么进行分库？"><a href="#怎么进行分库？" class="headerlink" title="怎么进行分库？"></a>怎么进行分库？</h3><p>分库的策略有两种，第一种是垂直分库：按照业务模块将不同的表拆分到不同的库中，比如说用户、登录、权限等表放在用户库中，商品、分类、库存放在商品库中，优惠券、满减、秒杀放在活动库中。</p>
+<p>第二种是水平分库：按照一定的策略将一个表中的数据拆分到多个库中，比如哈希分片和范围分片，对用户 id 进行取模运算或者范围划分，将数据分散到不同的库中。</p>
+<h3 id="怎么进行分表？"><a href="#怎么进行分表？" class="headerlink" title="怎么进行分表？"></a>怎么进行分表？</h3><p>当单表超过 500 万条数据，就可以考虑水平分表了。比如说我们可以将文章表拆分成多个表，如 article_0、article_9999、article_19999 等。</p>
+<p>在项目中，我们将文章的基本信息和内容详情做了垂直分表处理，因为文章的内容会占用比较大的空间，在只需要查看文章基本信息时把文章详情也带出来的话，就会占用更多的网络 IO 和内存导致查询变慢；而文章的基本信息，如标题、作者、状态等信息占用的空间较小，很适合不需要查询文章详情的场景。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                
+                
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="../../../../tags/Study/"># Study</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/hexo_blog/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="../../22/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94Redis/">今日八股—Redis</a>
+            
+            
+            <a class="next" rel="next" href="../../07/%E4%BB%8A%E6%97%A5%E5%85%AB%E8%82%A1%E2%80%94JVM/">今日八股—JVM</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© wuli韬 | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
